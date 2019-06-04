@@ -40,7 +40,7 @@
                     <ImageView
                         android:id="@+id/prod_img"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="400dp"
                         android:src="@drawable/mobile" />
 
                 </RelativeLayout>
@@ -70,6 +70,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_prod_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -88,6 +89,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_prod_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -346,6 +348,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/add_to_cart"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"

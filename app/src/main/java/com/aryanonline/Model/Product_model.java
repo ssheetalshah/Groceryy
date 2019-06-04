@@ -1,7 +1,9 @@
 package com.aryanonline.Model;
 
 
-public class Product_model {
+import java.io.Serializable;
+
+public class Product_model implements Serializable {
 
     String product_id;
     String product_name;

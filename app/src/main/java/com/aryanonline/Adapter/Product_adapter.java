@@ -14,6 +14,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aryanonline.ShowProdDetail;
 import com.bumptech.glide.Glide;
@@ -34,6 +35,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         implements Filterable {
 
     private List<Product_model> modelList;
+    Product_model product_model;
     private List<Product_model> mFilteredList;
     private Context context;
     private DatabaseHandler dbcart;
@@ -99,7 +101,6 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("increament", modelList.get(position).getIncreament());
                 map.put("product_name", modelList.get(position).getProduct_name());
-
                 map.put("price", modelList.get(position).getPrice());
                 map.put("stock", modelList.get(position).getIn_stock());
                 map.put("title", modelList.get(position).getTitle());
@@ -131,10 +132,41 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
             } else if (id == R.id.iv_subcat_img) {
                 //showImage(modelList.get(position).getProduct_image());
+
                 Intent  intent = new Intent(context, ShowProdDetail.class);
+                intent.putExtra("Product_Model",product_model);
+
+                intent.putExtra("product_id", modelList.get(position).getProduct_id());
+                intent.putExtra("category_id", modelList.get(position).getCategory_id());
+                intent.putExtra("product_image", modelList.get(position).getProduct_image());
+                intent.putExtra("increament", modelList.get(position).getIncreament());
+                intent.putExtra("product_name", modelList.get(position).getProduct_name());
+                intent.putExtra("price", modelList.get(position).getPrice());
+                intent.putExtra("stock", modelList.get(position).getIn_stock());
+                intent.putExtra("title", modelList.get(position).getTitle());
+                intent.putExtra("unit", modelList.get(position).getUnit());
+                intent.putExtra("Mrp", modelList.get(position).getMrp());
+                intent.putExtra("unit_value", modelList.get(position).getUnit_value());
+
                 context.startActivity(intent);
+               // Toast.makeText(context, "pp"+prodId, Toast.LENGTH_SHORT).show();
             } else if (id == R.id.card_view) {
+
                 Intent  intent = new Intent(context, ShowProdDetail.class);
+                intent.putExtra("Product_Model",product_model);
+
+                intent.putExtra("product_id", modelList.get(position).getProduct_id());
+                intent.putExtra("category_id", modelList.get(position).getCategory_id());
+                intent.putExtra("product_image", modelList.get(position).getProduct_image());
+                intent.putExtra("increament", modelList.get(position).getIncreament());
+                intent.putExtra("product_name", modelList.get(position).getProduct_name());
+                intent.putExtra("price", modelList.get(position).getPrice());
+                intent.putExtra("stock", modelList.get(position).getIn_stock());
+                intent.putExtra("title", modelList.get(position).getTitle());
+                intent.putExtra("unit", modelList.get(position).getUnit());
+                intent.putExtra("Mrp", modelList.get(position).getMrp());
+                intent.putExtra("unit_value", modelList.get(position).getUnit_value());
+
                 context.startActivity(intent);
              /*   showProductDetail(modelList.get(position).getProduct_image(),
                         modelList.get(position).getTitle(),
