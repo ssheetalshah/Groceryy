@@ -31,6 +31,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.aryanonline.Adapter.TopAdapter;
+import com.aryanonline.Model.TopModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -76,6 +78,7 @@ public class Home_fragment extends Fragment {
 
     private SliderLayout imgSlider;
     private RecyclerView rv_items;
+    private RecyclerView rv_top;
     TextView text_marquee;
     //private RelativeLayout rl_view_all;
 
@@ -94,6 +97,8 @@ public class Home_fragment extends Fragment {
     private String server_url;
     ArrayList<OfferModel> offer_list;
     private OfferAdapter offerAdapter;
+    ArrayList<TopModel> top_list;
+    private TopAdapter topAdapter;
     ArrayList<DealsModel> deals_list;
     private DealsAdapter dealsAdapter;
     ImageView imageNew;
@@ -137,6 +142,7 @@ public class Home_fragment extends Fragment {
 
         imgSlider = (SliderLayout) view.findViewById(R.id.home_img_slider);
         rv_items = (RecyclerView) view.findViewById(R.id.rv_home);
+        rv_top = (RecyclerView) view.findViewById(R.id.rv_top);
         offerlist = (RecyclerView) view.findViewById(R.id.offerlist);
         dealsview = (RecyclerView) view.findViewById(R.id.dealsview);
         searchview = (EditText) view.findViewById(R.id.searchview);
@@ -145,9 +151,9 @@ public class Home_fragment extends Fragment {
 
         text_marquee.setSelected(true);
 
-
         deals_list = new ArrayList<>();
         offer_list = new ArrayList<>();
+        top_list = new ArrayList<>();
 
         // add a divider after each item for more clarity
       /*  groceryAdapter = new RecyclerViewHorizontalListAdapter(groceryList, getActivity());
@@ -182,6 +188,12 @@ public class Home_fragment extends Fragment {
 
         if (ConnectivityReceiver.isConnected()){
             new GetTodaysDealslist().execute();
+        }else {
+            Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
+        }
+
+        if (ConnectivityReceiver.isConnected()){
+            new GetToplist().execute();
         }else {
             Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
         }
@@ -556,5 +568,90 @@ public class Home_fragment extends Fragment {
             }
         }
     }
+
+    //------------------------------------------------------
+
+    class GetToplist extends AsyncTask<String, String, String> {
+        String output = "";
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Processing");
+            dialog.setCancelable(true);
+            dialog.show();
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                server_url = "http://aryanonline.co.in/aryan-store/index.php/Api/get_top_products";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e("sever_url>>>>>>>>>", server_url);
+            output = HttpHandler.makeServiceCall(server_url);
+            //   Log.e("getcomment_url", output);
+            System.out.println("getcomment_url" + output);
+            return output;
+        }
+
+        @Override
+        protected void onPostExecute(String output) {
+            if (output == null) {
+                dialog.dismiss();
+            } else {
+                try {
+                    dialog.dismiss();
+                    JSONObject obj = new JSONObject(output);
+                    String responce = obj.getString("responce");
+                    JSONArray Data_array = obj.getJSONArray("data");
+                    for (int i = 0; i < Data_array.length(); i++) {
+                        JSONObject c = Data_array.getJSONObject(i);
+                        String product_id = c.getString("product_id");
+                        String product_name = c.getString("product_name");
+                        String product_description = c.getString("product_description");
+                        String product_image = c.getString("product_image");
+                        String category_id = c.getString("category_id");
+                        String in_stock = c.getString("in_stock");
+                        String price = c.getString("price");
+                        String unit_value = c.getString("unit_value");
+                        String unit = c.getString("unit");
+                        String increament = c.getString("increament");
+                        String Mrp = c.getString("Mrp");
+                        String today_deals = c.getString("today_deals");
+                        String offers_cat = c.getString("offers_cat");
+                        String deals_description = c.getString("deals_description");
+                        String offers_cat_desc = c.getString("offers_cat_desc");
+                        String emi = c.getString("emi");
+                        String warranty = c.getString("warranty");
+                        String product_offer_image = c.getString("product_offer_image");
+                        String p_offer_description = c.getString("p_offer_description");
+                        String top_product_status = c.getString("top_product_status");
+                        top_list.add(new TopModel(product_id,product_name,product_description,product_image,category_id,in_stock,price
+                                ,unit_value,unit,increament,Mrp,today_deals,offers_cat,deals_description,offers_cat_desc,emi,warranty,
+                                product_offer_image,p_offer_description,top_product_status));
+                    }
+
+                    topAdapter = new TopAdapter(getActivity(), top_list);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+//                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                    rv_top.setLayoutManager(gridLayoutManager);
+                    rv_top.setItemAnimator(new DefaultItemAnimator());
+                    rv_top.setAdapter(topAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //  dialog.dismiss();
+                }
+                super.onPostExecute(output);
+            }
+        }
+    }
+
 
 }

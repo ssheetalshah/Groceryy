@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                 drawer.openDrawer(GravityCompat.START);
             }
         });
+
         drawer.setDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
        // toggle.setHomeAsUpIndicator(R.drawable.arrow_yellow);
@@ -299,6 +300,7 @@ public class MainActivity extends AppCompatActivity
                 menu.performIdentifierAction(item.getItemId(), 0);
             }
         });
+
         totalBudgetCount = (TextView) count.findViewById(R.id.actionbar_notifcation_textview);
 
         totalBudgetCount.setText("" + dbcart.getCartCount());
@@ -351,6 +353,7 @@ public class MainActivity extends AppCompatActivity
             fm = new LocationFragment();
         }
         else if (id == R.id.nav_myorders) {
+
             fm = new My_order_fragment();
         } else if (id == R.id.nav_myprofile) {
             fm = new Edit_profile_fragment();
@@ -361,6 +364,7 @@ public class MainActivity extends AppCompatActivity
             args.putString("title", getResources().getString(R.string.nav_support));
             fm.setArguments(args);
         } else if (id == R.id.nav_aboutus) {
+
             fm = new Support_info_fragment();
             args.putString("url", BaseURL.GET_ABOUT_URL);
             args.putString("title", getResources().getString(R.string.nav_about));
@@ -462,13 +466,13 @@ public class MainActivity extends AppCompatActivity
             color = Color.RED;
 
             Snackbar snackbar = Snackbar
-                    .make(findViewById(R.id.coordinatorlayout), message, Snackbar.LENGTH_LONG)
+                    .make(findViewById(R.id.coordinatorlayout), message, Snackbar.LENGTH_LONG);
                 /*.setAction("Retry", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                    }
-                })*/;
+               }
+                })*/
 
             View sbView = snackbar.getView();
             TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);

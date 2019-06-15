@@ -268,6 +268,8 @@
 
 
             <LinearLayout
+                android:gravity="center"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -280,14 +282,13 @@
                     android:layout_weight="0.5"
                     android:text="EMI Option"
                     android:textColor="#000"
-                    android:textSize="13dp"
-
-                    />
+                    android:textSize="13dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <Button
@@ -354,9 +355,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add To Cart"
-                android:textSize="20dp"
-                android:textColor="#fff"
-                />
+                android:textSize="18dp"
+                android:textColor="#fff" />
         </LinearLayout>
 
         <LinearLayout
@@ -371,9 +371,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Buy Now"
-                android:textSize="20dp"
-                android:textColor="#fff"
-                />
+                android:textSize="18dp"
+                android:textColor="#fff" />
         </LinearLayout>
 
 
