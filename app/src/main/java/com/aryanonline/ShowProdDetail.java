@@ -76,7 +76,7 @@ public class ShowProdDetail extends AppCompatActivity {
         Glide.with(ShowProdDetail.this)
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_image"))
                 .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -118,10 +118,10 @@ public class ShowProdDetail extends AppCompatActivity {
 
 
                     if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf("1"));
+                   //     dbcart.setCart(map, Float.valueOf("1"));
 
                     } else {
-                        dbcart.setCart(map, Float.valueOf("1"));
+                  //      dbcart.setCart(map, Float.valueOf("1"));
                     }
 
             }

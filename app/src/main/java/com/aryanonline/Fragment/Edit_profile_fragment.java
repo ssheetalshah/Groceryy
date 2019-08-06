@@ -116,7 +116,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
             Glide.with(this)
                     .load(BaseURL.IMG_PROFILE_URL + getimage)
                     .centerCrop()
-                    .placeholder(R.drawable.logoimg)
+                    .placeholder(R.drawable.aplogo)
                     .crossFade()
                     .into(iv_profile);
         }

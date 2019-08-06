@@ -112,10 +112,10 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
                     if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                    //    dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     } else {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                      //  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     }
                 } else {
@@ -201,7 +201,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
                 .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -286,7 +286,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + image)
                 .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .into(iv_image);
 
@@ -323,7 +323,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + image)
                 .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .into(iv_image);
 
@@ -356,10 +356,10 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
                     if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                      //  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     } else {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                      //  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     }
                 } else {

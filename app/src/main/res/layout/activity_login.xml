@@ -39,7 +39,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logoimg"
+            android:src="@drawable/aplogo"
             app:civ_border_color="#ffffff"
             app:civ_border_width="2dp" />
         <!--<ImageView

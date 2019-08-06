@@ -1,6 +1,8 @@
 package com.aryanonline.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.aryanonline.Config.BaseURL;
 import com.aryanonline.Model.OfferModel;
 import com.aryanonline.Model.TopModel;
+import com.aryanonline.NewActivity;
 import com.aryanonline.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -28,9 +31,10 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView idProductName,idProductprice;
-      //  LinearLayout card;
+        public TextView idProductName, idProductprice;
+        //  LinearLayout card;
         ImageView idProductImage;
+        LinearLayout mainButton;
         int pos;
 
         public ViewHolder(View view) {
@@ -39,7 +43,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
             idProductName = (TextView) view.findViewById(R.id.idProductName);
             idProductprice = (TextView) view.findViewById(R.id.idProductprice);
             idProductImage = (ImageView) view.findViewById(R.id.idProductImage);
-           // card = (LinearLayout) view.findViewById(R.id.card_view);
+            mainButton = (LinearLayout) view.findViewById(R.id.mainButton);
+            // card = (LinearLayout) view.findViewById(R.id.card_view);
         }
     }
 
@@ -62,17 +67,30 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final TopAdapter.ViewHolder viewHolder, final int position) {
         TopModel topModel = TopList.get(position);
-        viewHolder.idProductName.setText(topModel.getProductName());
-       // viewHolder.idProductprice.setText(topModel.getPrice());
-        Image = topModel.getProductImage();
+        viewHolder.idProductName.setText(topModel.getProductname());
+        String s = topModel.getPrice();
+        Image = topModel.getImage();
+        String ss = s.indexOf(".") < 0 ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
+        viewHolder.idProductprice.setText(ss);
         Glide.with(context)
-                .load(BaseURL.IMG_PRODUCT_URL+Image)
-                .placeholder(R.drawable.shop)
+                .load(BaseURL.IMG_PRODUCT_URL + Image)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(viewHolder.idProductImage);
-       // viewHolder.card.setTag(viewHolder);
+        // viewHolder.card.setTag(viewHolder);
+
+        viewHolder.mainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TopModel topModel = TopList.get(position);
+                Intent intent = new Intent(context, NewActivity.class);
+                intent.putExtra("TopModel", topModel);
+                context.startActivity(intent);
+              //  ((Activity)context).finish();
+            }
+        });
         viewHolder.pos = position;
 
     }

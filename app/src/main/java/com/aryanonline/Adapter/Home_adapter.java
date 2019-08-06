@@ -55,7 +55,7 @@ public class Home_adapter extends RecyclerView.Adapter<Home_adapter.MyViewHolder
 
         Glide.with(context)
                 .load(BaseURL.IMG_CATEGORY_URL+mList.getImage())
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

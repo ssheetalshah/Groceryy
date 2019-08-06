@@ -36,7 +36,7 @@
                 android:gravity="center_horizontal"
                 android:background="@color/colorPrimary"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/logoimg"
+                android:src="@drawable/aplogo"
                 app:civ_border_color="#ffffff"
                 android:textAlignment="center"
                 app:civ_border_width="2dp"/>
@@ -68,11 +68,27 @@
                 android:id="@+id/tv_reg_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_reg_name_hint"
+                android:text="First Name"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/et_reg_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/tv_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_last_name1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_5"

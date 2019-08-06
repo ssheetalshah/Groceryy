@@ -18,7 +18,7 @@
         android:layout_margin="0dp"
         android:contentDescription="bell"
         android:gravity="center"
-        android:src="@drawable/shopcart" />
+        android:src="@drawable/shop" />
 
     <TextView
         android:id="@+id/actionbar_notifcation_textview"

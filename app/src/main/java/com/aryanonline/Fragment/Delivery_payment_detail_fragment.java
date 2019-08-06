@@ -80,14 +80,14 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
         btn_order = (Button) view.findViewById(R.id.buttonContinue);
 
-        getdate = getArguments().getString("getdate");
+     /*   getdate = getArguments().getString("getdate");
         gettime = getArguments().getString("time");
         getlocation_id = getArguments().getString("location_id");
-        deli_charges = Integer.parseInt(getArguments().getString("deli_charges"));
-        String getaddress = getArguments().getString("address");
+     //   deli_charges = Integer.parseInt(getArguments().getString("deli_charges"));
+        String getaddress = getArguments().getString("address");*/
 
         tv_timeslot.setText(getdate + " " + gettime);
-        tv_address.setText(getaddress);
+      //  tv_address.setText(getaddress);
 
         Double total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
 

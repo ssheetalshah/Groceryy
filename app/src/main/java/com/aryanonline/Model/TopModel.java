@@ -5,6 +5,71 @@ import java.io.Serializable;
 public class TopModel implements Serializable {
 
     private String productId;
+    private String productname;
+    private String quantity;
+    private String image;
+    private String stockStatus;
+    private String price;
+
+    public TopModel(String productId, String productname, String quantity, String image, String stockStatus, String price) {
+        this.productId = productId;
+        this.productname = productname;
+        this.quantity = quantity;
+        this.image = image;
+        this.stockStatus = stockStatus;
+        this.price = price;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getStockStatus() {
+        return stockStatus;
+    }
+
+    public void setStockStatus(String stockStatus) {
+        this.stockStatus = stockStatus;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    //----------------------
+   /* private String productId;
     private String productName;
     private String productDescription;
     private String productImage;
@@ -206,5 +271,5 @@ public class TopModel implements Serializable {
 
     public void setTopProductStatus(String topProductStatus) {
         this.topProductStatus = topProductStatus;
-    }
+    }*/
 }

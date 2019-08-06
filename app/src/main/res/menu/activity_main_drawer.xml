@@ -49,6 +49,10 @@
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_nav_share"
                     android:title="@string/nav_share" />
+                <item
+                    android:id="@+id/nav_wishlist"
+                    android:icon="@drawable/wishhh"
+                    android:title="My wishlist" />
             </menu>
         </item>
 

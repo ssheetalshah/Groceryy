@@ -3,11 +3,15 @@ package com.aryanonline.Fragment;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -27,10 +31,17 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Adapter.DeAdapter;
+import com.aryanonline.Adapter.TopViewAdapter;
+import com.aryanonline.Model.DModel;
+import com.aryanonline.Model.TopModel;
+import com.aryanonline.ViewDeatilsActivity;
+import com.aryanonline.util.HttpHandler;
 import com.daimajia.swipe.util.Attributes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,6 +80,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private EditText et_address;
     private Button btn_checkout;
     private RecyclerView rv_address;
+    String server_url;
 
     private Delivery_get_address_adapter adapter;
     private ArrayList<Delivery_address_model> delivery_address_modelList = new ArrayList<>();
@@ -88,6 +100,8 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private String gethouse;
     private String getname;
     private String getphone;
+    ArrayList<DModel> de_list;
+    private DeAdapter deAdapter;
 
     public Delivery_fragment() {
         // Required empty public constructor
@@ -102,7 +116,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
             gethouse = getArguments().getString("house_no");
             getname = getArguments().getString("receiver_name");
             getphone = getArguments().getString("receiver_mobile");
-            delivery_address_modelList.add(new Delivery_address_model(getlocation_id,getpin,gethouse,getname,getphone));
+            delivery_address_modelList.add(new Delivery_address_model(getlocation_id, getpin, gethouse, getname, getphone));
         }
     }
 
@@ -121,7 +135,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
         tv_guestuser.setText(AppPreference.getName(getActivity()));
 
         tv_guestmobile = (TextView) view.findViewById(R.id.tv_guestmobile);
-         tv_guestmobile.setText(AppPreference.getMobile(getActivity()));
+        tv_guestmobile.setText(AppPreference.getMobile(getActivity()));
 
         tv_date = (TextView) view.findViewById(R.id.tv_deli_date);
         tv_time = (TextView) view.findViewById(R.id.tv_deli_fromtime);
@@ -143,9 +157,13 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
         sessionManagement = new Session_management(getActivity());
         String getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
         String getaddress = sessionManagement.getUserDetails().get(BaseURL.KEY_HOUSE);
-
+        de_list = new ArrayList<>();
         //tv_socity.setText("Socity Name: " + getsocity);
         //et_address.setText(getaddress);
+
+        if (ConnectivityReceiver.isConnected()) {
+            new GetDetailslist().execute();
+        }
 
         tv_date.setOnClickListener(this);
         tv_time.setOnClickListener(this);
@@ -180,12 +198,6 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
             tv_time.setText(time);
         }
 
-        if (ConnectivityReceiver.isConnected()) {
-            String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-            makeGetAddressRequest(user_id);
-        } else {
-            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
-        }
 
         return view;
     }
@@ -223,8 +235,8 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
-            Bundle bundle=new Bundle();
-            bundle.putParcelableArrayList("ListModel",delivery_address_modelList);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("ListModel", delivery_address_modelList);
             fm.setArguments(bundle);
 
         }
@@ -424,4 +436,80 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
         }
     };
 
+    //---------------------------------------------------
+
+    class GetDetailslist extends AsyncTask<String, String, String> {
+        String output = "";
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Processing");
+            dialog.setCancelable(true);
+            dialog.show();
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                server_url = "https://enlightshopping.com/api/api/get_address?user_id=" + AppPreference.getUserid(getActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e("sever_url>>>>>>>>>", server_url);
+            output = HttpHandler.makeServiceCall(server_url);
+            //   Log.e("getcomment_url", output);
+            System.out.println("getcomment_url" + output);
+            return output;
+        }
+
+        @Override
+        protected void onPostExecute(String output) {
+            if (output == null) {
+                dialog.dismiss();
+            } else {
+                try {
+                    dialog.dismiss();
+                    JSONObject obj = new JSONObject(output);
+                    String responce = obj.getString("responce");
+                    JSONArray Data_array = obj.getJSONArray("data");
+                    for (int i = 0; i < Data_array.length(); i++) {
+                        JSONObject c = Data_array.getJSONObject(i);
+                        String address_id = c.getString("address_id");
+                        String customer_id = c.getString("customer_id");
+                        String firstname = c.getString("firstname");
+                        String lastname = c.getString("lastname");
+                        String company = c.getString("company");
+                        String company_id = c.getString("company_id");
+                        String tax_id = c.getString("tax_id");
+                        String address_1 = c.getString("address_1");
+                        String address_2 = c.getString("address_2");
+                        String city = c.getString("city");
+                        String postcode = c.getString("postcode");
+                        String country_id = c.getString("country_id");
+                        String zone_id = c.getString("zone_id");
+                        de_list.add(new DModel(address_id, customer_id, firstname, lastname, company, company_id, tax_id, address_1, address_2,
+                                city, postcode, country_id, zone_id));
+                    }
+
+                    deAdapter = new DeAdapter(getActivity(), de_list);
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                    rv_address.setLayoutManager(mLayoutManager);
+                    rv_address.setItemAnimator(new DefaultItemAnimator());
+                    //   rv_top.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+                    rv_address.setAdapter(deAdapter);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //  dialog.dismiss();
+                }
+                super.onPostExecute(output);
+            }
+        }
+    }
 }

@@ -144,6 +144,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
 
         context = parent.getContext();
 
+
         return new Delivery_get_address_adapter.MyViewHolder(itemView);
     }
 

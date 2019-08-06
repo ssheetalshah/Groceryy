@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.aryanonline.Model.DealsModel;
+import com.aryanonline.Model.DetailsModel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -60,7 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean setCart(HashMap<String, String> map, Float Qty) {
+    public boolean setCart(HashMap<Integer, String> map, Float Qty) {
         db = getWritableDatabase();
         if (isInCart(map.get(COLUMN_ID))) {
             db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
@@ -84,6 +87,63 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return true;
         }
     }
+
+
+
+    public boolean setCartSimple(HashMap<Integer, DetailsModel> map, Float Qty , int position) {
+        db = getWritableDatabase();
+        if (isInCart(String.valueOf(position))) {
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            return false;
+        } else {
+            ContentValues values = new ContentValues();
+
+//            values.put(COLUMN_ID, "");
+            values.put(COLUMN_QTY, Qty);
+            values.put(COLUMN_CAT_ID, map.get(position).getModel());
+            values.put(COLUMN_IMAGE, map.get(position).getImage());
+            values.put(COLUMN_INCREAMENT, position);
+            values.put(COLUMN_NAME, map.get(position).getProductname());
+            values.put(COLUMN_PRICE, map.get(position).getPrice());
+            values.put(COLUMN_STOCK, map.get(position).getStockStatus());
+            values.put(COLUMN_TITLE, map.get(position).getDescription());
+            values.put(COLUMN_UNIT, map.get(position).getQuantity());
+            values.put(COLUMN_UNIT_VALUE, map.get(position).getModel());
+
+            db.insert(CART_TABLE, null, values);
+            return true;
+        }
+    }
+
+    //for different cart
+//    public boolean setCartSimple(DealsModel map, Float Qty) {
+//        db = getWritableDatabase();
+//        if (isInCart(map.get(COLUMN_ID))) {
+//            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+//            return false;
+//        } else {
+//            ContentValues values = new ContentValues();
+//
+//            values.put(COLUMN_ID, map.(COLUMN_ID));
+//            values.put(COLUMN_QTY, Qty);
+//            values.put(COLUMN_CAT_ID, map.get(COLUMN_CAT_ID));
+//            values.put(COLUMN_IMAGE, map.get(COLUMN_IMAGE));
+//            values.put(COLUMN_INCREAMENT, map.get(COLUMN_INCREAMENT));
+//            values.put(COLUMN_NAME, map.get(COLUMN_NAME));
+//            values.put(COLUMN_PRICE, map.get(COLUMN_PRICE));
+//            values.put(COLUMN_STOCK, map.get(COLUMN_STOCK));
+//            values.put(COLUMN_TITLE, map.get(COLUMN_TITLE));
+//            values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
+//            values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
+//
+//            db.insert(CART_TABLE, null, values);
+//            return true;
+//        }
+//    }
+
+    //
+
+
 
     public boolean isInCart(String id) {
         db = getReadableDatabase();

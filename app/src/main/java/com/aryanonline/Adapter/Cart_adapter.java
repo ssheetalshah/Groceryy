@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -65,6 +66,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         return new ProductHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(final ProductHolder holder, final int position) {
         final HashMap<String, String> map = list.get(position);
@@ -76,7 +78,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         Glide.with(activity)
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_image"))
                 .centerCrop()
-                .placeholder(R.drawable.logoimg)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -129,8 +131,8 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
             @Override
             public void onClick(View view) {
 
-                dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
-
+               // dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+             //   Toast.makeText(activity, "at cart value "+ dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString())), Toast.LENGTH_SHORT).show();
                 Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
                 Double price = Double.parseDouble(map.get("price"));
 

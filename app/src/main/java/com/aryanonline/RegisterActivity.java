@@ -40,13 +40,13 @@ public class RegisterActivity extends AppCompatActivity implements
 
     private static String TAG = RegisterActivity.class.getSimpleName();
 
-    private EditText et_phone, et_name, et_password, et_email;
+    private EditText et_phone, et_name, et_password, et_email, et_last_name1;
     private Button btn_register;
     private TextView tv_phone, tv_name, tv_password, tv_email;
     String Selected_product;
-    String getphone, getname, getpassword, getemail, getKyc, getAccountNum, getIfsc, getBankName, getSponserId;
+    String getphone, getname, getpassword, getemail, getKyc, getAccountNum, getIfsc, getBankName, getSponserId, getLast;
     Session_management sessionManagement;
-    String user_fullname = "", user_phone = "";
+    String firstname = "", telephone = "",customer_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity implements
 
         et_phone = (EditText) findViewById(R.id.et_reg_phone);
         et_name = (EditText) findViewById(R.id.et_reg_name);
+        et_last_name1 = (EditText) findViewById(R.id.et_last_name1);
         et_password = (EditText) findViewById(R.id.et_reg_password);
         et_email = (EditText) findViewById(R.id.et_reg_email);
         tv_password = (TextView) findViewById(R.id.tv_reg_password);
@@ -75,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity implements
             public void onClick(View view) {
                 getphone = et_phone.getText().toString();
                 getname = et_name.getText().toString();
+                getLast = et_last_name1.getText().toString();
                 getpassword = et_password.getText().toString();
                 getemail = et_email.getText().toString();
 
@@ -220,12 +222,13 @@ public class RegisterActivity extends AppCompatActivity implements
 
             try {
 
-                URL url = new URL("http://aryanonline.co.in/aryan-store/index.php/Api/signup");
+                URL url = new URL("https://enlightshopping.com/api/api/ragistration");
 
                 JSONObject postDataParams = new JSONObject();
-                postDataParams.put("user_name", getname);
-                postDataParams.put("user_mobile", getphone);
-                postDataParams.put("user_email", getemail);
+                postDataParams.put("firstname", getname);
+                postDataParams.put("lastname", getLast);
+                postDataParams.put("mobile", getphone);
+                postDataParams.put("email", getemail);
                 postDataParams.put("password", getpassword);
 
                 Log.e("postDataParams", postDataParams.toString());
@@ -278,27 +281,43 @@ public class RegisterActivity extends AppCompatActivity implements
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String responce = jsonObject.getString("responce");
-                    String message = jsonObject.getString("message");
-                    JSONObject obj = jsonObject.getJSONObject("data");
-                    user_phone = obj.getString("user_phone");
-                    String user_email = obj.getString("user_email");
-                    user_fullname = obj.getString("user_fullname");
-                    String password = obj.getString("password");
-                    String user_id = obj.getString("user_id");
+                    //String message = jsonObject.getString("message");
+                    JSONObject msgObj = jsonObject.getJSONObject("massage");
+                    //   user_phone = msgObj.getString("customer_id");
+                     customer_id = msgObj.getString("customer_id");
+                    String store_id = msgObj.getString("store_id");
+                     firstname = msgObj.getString("firstname");
+                    String lastname = msgObj.getString("lastname");
+                    String email = msgObj.getString("email");
+                     telephone = msgObj.getString("telephone");
+                    String fax = msgObj.getString("fax");
+                    String password = msgObj.getString("password");
+                    String salt = msgObj.getString("salt");
+                    String cart = msgObj.getString("cart");
+                    String wishlist = msgObj.getString("wishlist");
+                    String newsletter = msgObj.getString("newsletter");
+                    String address_id = msgObj.getString("address_id");
+                    String customer_group_id = msgObj.getString("customer_group_id");
+                    String ip = msgObj.getString("ip");
+                    String status = msgObj.getString("status");
+                    String approved = msgObj.getString("approved");
+                    String token = msgObj.getString("token");
+                    String date_added = msgObj.getString("date_added");
 
-                    Log.e(">>>>", jsonObject.toString() + " " + responce + " " + message);
+                    Log.e(">>>>", jsonObject.toString() + " " + responce);
 
                     if (responce.equalsIgnoreCase("true")) {
-                        AppPreference.setName(RegisterActivity.this, user_fullname);
-                        AppPreference.setMobile(RegisterActivity.this, user_phone);
+                        AppPreference.setName(RegisterActivity.this, firstname);
+                        AppPreference.setMobile(RegisterActivity.this, telephone);
+                        AppPreference.setUserid(RegisterActivity.this, telephone);
 
-                        sessionManagement.createLoginSession(user_id, user_fullname, user_email, password);
+                        sessionManagement.createLoginSession(customer_id, firstname, email, password);
                         et_name.setText("");
                         et_phone.setText("");
                         et_email.setText("");
                         et_phone.setText("");
 
-                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, responce, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
                     }

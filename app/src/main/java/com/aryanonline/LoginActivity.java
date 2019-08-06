@@ -44,8 +44,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String Email,Password;
     String sever_url;
     Session_management sessionManagement;
-     String user_fullname= "";
-    String user_phone="";
+     String firstname= "";
+    String telephone="";
+    String customer_id="";
 
 
     @Override
@@ -183,11 +184,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             try {
 
-                URL url = new URL("http://aryanonline.co.in/aryan-store/index.php/Api/login");
+                URL url = new URL("https://enlightshopping.com/api/api/login");
 
 
                 JSONObject postDataParams = new JSONObject();
-                postDataParams.put("user_email", Email);
+                postDataParams.put("email", Email);
                 postDataParams.put("password", Password);
 
 
@@ -258,31 +259,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e("SendJsonDataToServer>>>", result.toString());
                 try {
 
-
-                    // result=getJSONUrl(URL);  //<< get json string from server
                     JSONObject jsonObject = new JSONObject(result);
-                    //jsonObject = new JSONObject(result);
-                    String response = jsonObject.getString("responce");
-                   // String message = jsonObject.getString("message");
-                    JSONObject message = jsonObject.getJSONObject("data");
-                    String user_id = message.getString("user_id");
-                    user_fullname = message.getString("user_fullname");
-                    String user_email =message.getString("user_email");
-                   user_phone = message.getString("user_phone");
-                    String user_image = message.getString("user_image");
+                    String responce = jsonObject.getString("responce");
+                    //String message = jsonObject.getString("message");
+                    JSONObject msgObj = jsonObject.getJSONObject("data");
+                    //   user_phone = msgObj.getString("customer_id");
+                     customer_id = msgObj.getString("customer_id");
+                    String store_id = msgObj.getString("store_id");
+                    firstname = msgObj.getString("firstname");
+                    String lastname = msgObj.getString("lastname");
+                    String email = msgObj.getString("email");
+                    telephone = msgObj.getString("telephone");
+                    String fax = msgObj.getString("fax");
+                    String password = msgObj.getString("password");
+                    String salt = msgObj.getString("salt");
+                    String cart = msgObj.getString("cart");
+                    String wishlist = msgObj.getString("wishlist");
+                    String newsletter = msgObj.getString("newsletter");
+                    String address_id = msgObj.getString("address_id");
+                    String customer_group_id = msgObj.getString("customer_group_id");
+                    String ip = msgObj.getString("ip");
+                    String status = msgObj.getString("status");
+                    String approved = msgObj.getString("approved");
+                    String token = msgObj.getString("token");
+                    String date_added = msgObj.getString("date_added");
+                   // Log.e(">>>>", jsonObject.toString() );
 
-                    Log.e(">>>>", jsonObject.toString() + " " + response + " " + "");
-
-                    if (response.equalsIgnoreCase("true")) {
-                        AppPreference.setName(LoginActivity.this,user_fullname);
-                        AppPreference.setMobile(LoginActivity.this,user_phone);
-                        Log.e("user_fullname",user_fullname);
-                        Log.e("user_phone",user_phone);
+                    if (responce.equalsIgnoreCase("true")) {
+                        AppPreference.setName(LoginActivity.this,firstname);
+                        AppPreference.setMobile(LoginActivity.this,telephone);
+                        AppPreference.setUserid(LoginActivity.this,customer_id);
+                        Log.e("user_fullname",firstname);
+                        Log.e("user_phone",telephone);
                         et_email.setText("");
                         et_password.setText("");
 
 
-                        sessionManagement.createLoginSession(user_id,user_fullname,user_email,Password);
+                      sessionManagement.createLoginSession(customer_id,firstname,email,password);
 
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

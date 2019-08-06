@@ -36,7 +36,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         public ViewHolder(View view) {
             super(view);
 
-            idProductName = (TextView) view.findViewById(R.id.idProductName);
+           // idProductName = (TextView) view.findViewById(R.id.idProductName);
             idProductImage = (ImageView) view.findViewById(R.id.idProductImage);
             card = (LinearLayout) view.findViewById(R.id.card_view);
         }
@@ -61,11 +61,11 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final OfferAdapter.ViewHolder viewHolder, final int position) {
         OfferModel offerModel = OffList.get(position);
-        viewHolder.idProductName.setText(offerModel.getOffersCatDesc());
-        Image = offerModel.getProductImage();
+     //   viewHolder.idProductName.setText(offerModel.getOffersCatDesc());
+        Image = offerModel.getImage();
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL+Image)
-                .placeholder(R.drawable.shop)
+                .placeholder(R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

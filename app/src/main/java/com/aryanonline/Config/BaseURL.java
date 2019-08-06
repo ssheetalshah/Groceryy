@@ -109,62 +109,63 @@ public class BaseURL {
     //*****************************************************************************
     
 
-//   public static final String BASEURL2 = "https://infocentroid.us/";
-  
-   public static final String BASEURL2 = "http://aryanonline.co.in/";
 
-//    public static final String BASEURL2 = "https://rightchoiceretail.com/";
+   public static final String BASEURL2 = "https://enlightshopping.com";
+//   public static final String BASEURL2 = "http://aryanonline.co.in/";
 
-    public static String GET_SLIDERS = BASEURL2 +"aryan-store/index.php/Api/get_sliders";
+    public static String GET_SLIDERS = BASEURL2 +"/api/api/get_banner_image";
 
-    public static final String IMG_PROFILE_URL = BASEURL2 + "aryan-store/uploads/profile/";
+    public static final String IMG_PROFILE_URL = BASEURL2 + "/image/profile/";
 
-    public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "aryan-store/index.php/api/get_limit_settings";
+    public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "/api/api/get_limit_settings";
 
-    public static final String IMG_SLIDER_URL = BASEURL2 + "aryan-store/uploads/sliders/";
+    public static final String IMG_SLIDER_URL = BASEURL2 + "/image/";
 
-    public static final String IMG_CATEGORY_URL = BASEURL2 + "aryan-store/uploads/category/";
+    public static final String IMG_CATEGORY_URL = BASEURL2 + "/api/api/category/";
 
-    public static final String IMG_PRODUCT_URL = BASEURL2 + "aryan-store/uploads/products/";
+    public static final String IMG_PRODUCT_URL = BASEURL2 + "/image/";
 
-    public static final String GET_CATEGORY_URL = BASEURL2 + "aryan-store/index.php/Api/get_categories";
+    public static final String GET_CATEGORY_URL = BASEURL2 + "/api/api/get_categories";
 
-    public static final String GET_SLIDER_URL = BASEURL2 + "aryan-store/index.php/Api/get_sliders";
+//    public static final String GET_SLIDER_URL = BASEURL2 + "/api/api/get_sliders";
+ //   public static final String GET_SLIDER_URL = BASEURL2 + "/api/api/get_banner_image";
 
-    public static final String GET_SUPPORT_URL = BASEURL2 +  "aryan-store/index.php/Api/support";
+    public static final String GET_SUPPORT_URL = BASEURL2 +  "/api/api/support";
 
-    public static final String GET_ABOUT_URL =  BASEURL2 + "aryan-store/index.php/Api/aboutus";
+    public static final String GET_ABOUT_URL =  BASEURL2 + "/api/api/aboutus";
 
-    public static final String GET_TERMS_URL = BASEURL2 + "aryan-store/index.php/Api/terms";
+    public static final String GET_TERMS_URL = BASEURL2 + "/api/api/terms";
 
-    public static final String GET_PRODUCT_URL = BASEURL2 + "aryan-store/index.php/Api/get_products";
+    public static final String GET_PRODUCT_URL = BASEURL2 + "/api/api/get_products";
+    public static final String GET_DETAILS_URL = BASEURL2 + "/api/api/getProductdetails";
 
-    public static final String GET_TIME_SLOT = BASEURL2 + "aryan-store/index.php/Api/get_time_slot";
+    public static final String GET_TIME_SLOT = BASEURL2 + "/api/api/get_time_slot";
 
-    public static final String GET_SOCITY = BASEURL2 + "aryan-store/index.php/Api/get_society";
+    public static final String GET_SOCITY = BASEURL2 + "/api/api/get_society";
 
-    public static final String ADD_ADDRESS = BASEURL2 + "aryan-store/index.php/Api/add_address";
+    public static final String ADD_ADDRESS = BASEURL2 + "/api/api/add_address";
 
-    public static final String GET_ADDRESS = BASEURL2 + "aryan-store/index.php/Api/get_address";
+    public static final String GET_ADDRESS = BASEURL2 + "/api/api/get_address";
 
-    public static final String EDIT_PROFILE = BASEURL2 + "aryan-store/index.php/Api/update_userdata";
+    public static final String EDIT_PROFILE = BASEURL2 + "/api/api/update_userdata";
 
-    public static final String ADD_ORDER = BASEURL2 + "aryan-store/index.php/Api/send_order";
+    public static final String ADD_ORDER = BASEURL2 + "/api/api/send_order";
 
-    public static final String GET_ORDER = BASEURL2 + "aryan-store/index.php/Api/my_orders";
+    public static final String GET_ORDER = BASEURL2 + "/api/api/my_orders";
 
-    public static final String GET_LOCATION = BASEURL2 + "aryan-store/index.php/api/location";
+    public static final String GET_LOCATION = BASEURL2 + "/api/api/location";
 
-    public static final String ORDER_DETAIL = BASEURL2 + "aryan-store/index.php/Api/order_details";
+    public static final String ORDER_DETAIL = BASEURL2 + "/api/api/order_details";
 
-    public static final String DELETE_ORDER = BASEURL2 + "aryan-store/index.php/Api/cancel_order";
+    public static final String DELETE_ORDER = BASEURL2 + "/api/api/cancel_order";
 
-    public static final String RIGISTER_FCM = BASEURL2 + "aryan-store/index.php/Api/register_fcm";
+    public static final String RIGISTER_FCM = BASEURL2 + "/api/api/register_fcm";
 
-    public static final String CHANGE_PASSWORD = BASEURL2 + "aryan-store/index.php/Api/change_password";
+    public static final String CHANGE_PASSWORD = BASEURL2 + "/api/api/change_password";
 
-    public static final String DELETE_ADDRESS = BASEURL2 + "aryan-store/index.php/Api/delete_address";
+    public static final String DELETE_ADDRESS = BASEURL2 + "/api/api/delete_address";
 
-    public static final String EDIT_ADDRESS = BASEURL2 + "aryan-store/index.php/Api/edit_address";
+  //  public static final String EDIT_ADDRESS = BASEURL2 + "/api/api/edit_address";
+    public static final String EDIT_ADDRESS = BASEURL2 + "/api/api/add_address";
 
 }

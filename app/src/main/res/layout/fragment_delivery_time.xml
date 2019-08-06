@@ -66,6 +66,7 @@
 
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_deli_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -78,6 +79,7 @@
                     android:padding="@dimen/space_5"/>
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_deli_fromtime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

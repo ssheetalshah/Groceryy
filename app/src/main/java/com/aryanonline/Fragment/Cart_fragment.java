@@ -95,7 +95,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 
         tv_clear.setOnClickListener(this);
         btn_checkout.setOnClickListener(this);
-
+      //  Toast.makeText(getActivity(), "Cart fragments+_____________", Toast.LENGTH_SHORT).show();
         return view;
     }
 
@@ -107,12 +107,24 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             // showdialog
             showClearDialog();
         } else if (id == R.id.btn_cart_checkout) {
-
-            if (ConnectivityReceiver.isConnected()) {
+            if(!sessionManagement.isLoggedIn()) {
+                Intent i = new Intent(getActivity(), ContinueActivity.class);
+                startActivity(i);
+            }else {
+                Bundle args = new Bundle();
+                Fragment fm = new Delivery_fragment();
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+//                Intent i = new Intent(getActivity(), Deli.class);
+//                startActivity(i);
+            }
+          /*  if (ConnectivityReceiver.isConnected()) {
                 makeGetLimiteRequest();
             } else {
                 ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
-            }
+            }*/
 
         }
     }
