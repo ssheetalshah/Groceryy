@@ -3,8 +3,8 @@ package com.aryanonline;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +13,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.aryanonline.util.AppPreference;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,10 +32,6 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import com.aryanonline.util.AppPreference;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.Session_management;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -57,17 +57,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_login);
+        setContentView(com.aryanonline.R.layout.activity_login);
 
         sessionManagement = new Session_management(LoginActivity.this);
 
-        et_password = (EditText) findViewById(R.id.et_login_pass);
-        et_email = (EditText) findViewById(R.id.et_login_email);
-        tv_password = (TextView) findViewById(R.id.tv_login_password);
-        tv_email = (TextView) findViewById(R.id.tv_login_email);
-        btn_continue = (Button) findViewById(R.id.btnContinue);
-        btn_register = (Button) findViewById(R.id.btnRegister);
-        btn_forgot = (TextView) findViewById(R.id.btnForgot);
+        et_password = (EditText) findViewById(com.aryanonline.R.id.et_login_pass);
+        et_email = (EditText) findViewById(com.aryanonline.R.id.et_login_email);
+        tv_password = (TextView) findViewById(com.aryanonline.R.id.tv_login_password);
+        tv_email = (TextView) findViewById(com.aryanonline.R.id.tv_login_email);
+        btn_continue = (Button) findViewById(com.aryanonline.R.id.btnContinue);
+        btn_register = (Button) findViewById(com.aryanonline.R.id.btnRegister);
+        btn_forgot = (TextView) findViewById(com.aryanonline.R.id.btnForgot);
 
         btn_continue.setOnClickListener(this);
         btn_register.setOnClickListener(this);
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.btnContinue) {
+        if (id == com.aryanonline.R.id.btnContinue) {
 
             Email = et_email.getText().toString().trim();
             Password = et_password.getText().toString().trim();
@@ -89,10 +89,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             new SendJsonDataToServer().execute();
 
 
-        } else if (id == R.id.btnRegister) {
+        } else if (id == com.aryanonline.R.id.btnRegister) {
             Intent startRegister = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(startRegister);
-        }else if (id == R.id.btnForgot) {
+        }else if (id == com.aryanonline.R.id.btnForgot) {
             Intent startRegister = new Intent(LoginActivity.this, ForgotActivity.class);
             startActivity(startRegister);
         }
@@ -100,11 +100,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void attemptLogin() {
 
-        tv_email.setText(getResources().getString(R.string.tv_login_email));
-        tv_password.setText(getResources().getString(R.string.tv_login_password));
+        tv_email.setText(getResources().getString(com.aryanonline.R.string.tv_login_email));
+        tv_password.setText(getResources().getString(com.aryanonline.R.string.tv_login_password));
 
-        tv_password.setTextColor(getResources().getColor(R.color.color_3));
-        tv_email.setTextColor(getResources().getColor(R.color.color_3));
+        tv_password.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
 
        // String getpassword = et_password.getText().toString();
        // String getemail = et_email.getText().toString();
@@ -113,23 +113,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         View focusView = null;
 
         if (TextUtils.isEmpty(Password)) {
-            tv_password.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_password.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_password;
             cancel = true;
         } else if (!isPasswordValid(Password)) {
-            tv_password.setText(getResources().getString(R.string.password_too_short));
-            tv_password.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_password.setText(getResources().getString(com.aryanonline.R.string.password_too_short));
+            tv_password.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_password;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(Email)) {
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         } else if (!isEmailValid(Email)) {
-            tv_email.setText(getResources().getString(R.string.invalide_email_address));
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setText(getResources().getString(com.aryanonline.R.string.invalide_email_address));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         }

@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,9 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -28,63 +23,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.aryanonline.Adapter.DealsAdapter;
+import com.aryanonline.Adapter.Gems_adapter;
+import com.aryanonline.Adapter.Home_adapter;
+import com.aryanonline.Adapter.HorizontalAdapter;
 import com.aryanonline.Adapter.MyAdapterrr;
 import com.aryanonline.Adapter.NewCatAdapter;
+import com.aryanonline.Adapter.OfferAdapter;
+import com.aryanonline.Adapter.RecyclerViewHorizontalListAdapter;
 import com.aryanonline.Adapter.TopAdapter;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Category_model;
+import com.aryanonline.Model.Data;
+import com.aryanonline.Model.DealsModel;
+import com.aryanonline.Model.GemsCategory;
+import com.aryanonline.Model.Grocery;
 import com.aryanonline.Model.NewCategory;
+import com.aryanonline.Model.OfferModel;
 import com.aryanonline.Model.TopModel;
+import com.aryanonline.NewSubActivity;
+import com.aryanonline.R;
 import com.aryanonline.ViewDeatilsActivity;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.HttpHandler;
+import com.aryanonline.util.RecyclerTouchListener;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.aryanonline.Adapter.DealsAdapter;
-import com.aryanonline.Adapter.Home_adapter;
-import com.aryanonline.Adapter.HorizontalAdapter;
-import com.aryanonline.Adapter.OfferAdapter;
-import com.aryanonline.Adapter.RecyclerViewHorizontalListAdapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Category_model;
-import com.aryanonline.Model.Data;
-import com.aryanonline.Model.DealsModel;
-import com.aryanonline.Model.Grocery;
-import com.aryanonline.Model.OfferModel;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.HttpHandler;
-import com.aryanonline.util.RecyclerTouchListener;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -116,18 +88,22 @@ public class Home_fragment extends Fragment {
     private TopAdapter topAdapter;
     ArrayList<DealsModel> deals_list;
     private NewCatAdapter newCatAdapter;
+    private Gems_adapter GemAdapter;
     ArrayList<NewCategory> nCat_list;
+    ArrayList<GemsCategory> GemList;
     private DealsAdapter dealsAdapter;
     ImageView imageNew;
     String product_image;
     private static ViewPager mPager;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private static int currentPage = 0;
-    private static final Integer[] XMEN = {R.drawable.pfour, R.drawable.pfive, R.drawable.psix};
+    private static final Integer[] XMEN = {com.aryanonline.R.drawable.pfour, com.aryanonline.R.drawable.pfive, com.aryanonline.R.drawable.psix};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
     RecyclerView listPost;
     TextView bt_view;
     RecyclerView cateList;
+    RecyclerView GemsList;
+    TextView tx1, tx2, tx3, tx4;
 
     public Home_fragment() {
         // Required empty public constructor
@@ -142,10 +118,10 @@ public class Home_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_home, container, false);
         setHasOptionsMenu(true);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.app_name));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.app_name));
         ((MainActivity) getActivity()).updateHeader();
 
         // handle the touch event if true
@@ -166,16 +142,22 @@ public class Home_fragment extends Fragment {
         });
 
         //    imgSlider = (SliderLayout) view.findViewById(R.id.home_img_slider);
-        rv_items = (RecyclerView) view.findViewById(R.id.rv_home);
-        listPost = (RecyclerView) view.findViewById(R.id.listPost);
-        rv_top = (RecyclerView) view.findViewById(R.id.rv_top);
-        offerlist = (RecyclerView) view.findViewById(R.id.offerlist);
-        dealsview = (RecyclerView) view.findViewById(R.id.dealsview);
-        cateList = (RecyclerView) view.findViewById(R.id.cateList);
-        searchview = (EditText) view.findViewById(R.id.searchview);
-        imageNew = (ImageView) view.findViewById(R.id.imgNew);
-        bt_view = (TextView) view.findViewById(R.id.bt_view);
-        text_marquee = view.findViewById(R.id.text_marquee);
+        rv_items = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_home);
+        listPost = (RecyclerView) view.findViewById(com.aryanonline.R.id.listPost);
+        rv_top = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_top);
+        offerlist = (RecyclerView) view.findViewById(com.aryanonline.R.id.offerlist);
+        dealsview = (RecyclerView) view.findViewById(com.aryanonline.R.id.dealsview);
+        cateList = (RecyclerView) view.findViewById(com.aryanonline.R.id.cateList);
+        GemsList = (RecyclerView) view.findViewById(com.aryanonline.R.id.cate2List);
+        searchview = (EditText) view.findViewById(com.aryanonline.R.id.searchview);
+        imageNew = (ImageView) view.findViewById(com.aryanonline.R.id.imgNew);
+        bt_view = (TextView) view.findViewById(com.aryanonline.R.id.bt_view);
+        text_marquee = view.findViewById(com.aryanonline.R.id.text_marquee);
+
+        tx1 = view.findViewById(R.id.tx_1);
+        tx2 = view.findViewById(R.id.tx_2);
+        tx3 = view.findViewById(R.id.tx_3);
+        tx4 = view.findViewById(R.id.tx_4);
 
         text_marquee.setSelected(true);
 
@@ -183,6 +165,7 @@ public class Home_fragment extends Fragment {
         offer_list = new ArrayList<>();
         top_list = new ArrayList<>();
         nCat_list = new ArrayList<>();
+        GemList = new ArrayList<>();
 
         // add a divider after each item for more clarity
       /*  groceryAdapter = new RecyclerViewHorizontalListAdapter(groceryList, getActivity());
@@ -193,6 +176,8 @@ public class Home_fragment extends Fragment {
 */
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rv_items.setLayoutManager(gridLayoutManager);
+
+        TxviewListener();
 
 
         //rv_items.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -223,6 +208,7 @@ public class Home_fragment extends Fragment {
         }
         if (ConnectivityReceiver.isConnected()) {
             new GetCateeelist().execute();
+            new GetGemslist().execute();
         } else {
             Toast.makeText(getActivity(), "No Internet", Toast.LENGTH_SHORT).show();
         }
@@ -240,7 +226,7 @@ public class Home_fragment extends Fragment {
                 args.putString("cat_title", getcat_title);
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
 
             }
@@ -264,7 +250,7 @@ public class Home_fragment extends Fragment {
             public void onClick(View v) {
                 Fragment fm = new Search_fragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
             }
         });
@@ -272,9 +258,9 @@ public class Home_fragment extends Fragment {
         for (int i = 0; i < XMEN.length; i++)
             XMENArray.add(XMEN[i]);
 
-        mPager = (ViewPager) view.findViewById(R.id.pager);
+        mPager = (ViewPager) view.findViewById(com.aryanonline.R.id.pager);
         mPager.setAdapter(new MyAdapterrr(getActivity(), XMENArray));
-        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+        CircleIndicator indicator = (CircleIndicator) view.findViewById(com.aryanonline.R.id.indicator);
         indicator.setViewPager(mPager);
 
         // Auto start of viewpager
@@ -296,6 +282,51 @@ public class Home_fragment extends Fragment {
         }, 3000, 3000);
 
         return view;
+    }
+
+
+
+    private void TxviewListener()
+    {
+        tx1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewSubActivity.class);
+                intent.putExtra("NewCategory", "129");
+                getActivity().startActivity(intent);
+            }
+        });
+
+
+        tx2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewSubActivity.class);
+                intent.putExtra("NewCategory", "130");
+                getActivity().startActivity(intent);
+            }
+        });
+
+
+        tx3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewSubActivity.class);
+                intent.putExtra("NewCategory", "69");
+                getActivity().startActivity(intent);
+            }
+        });
+
+
+        tx4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewSubActivity.class);
+                intent.putExtra("NewCategory", "76");
+                getActivity().startActivity(intent);
+            }
+        });
+
     }
 
     //---------------------------------------------------------------------
@@ -517,4 +548,82 @@ public class Home_fragment extends Fragment {
             }
         }
     }
+
+
+    class GetGemslist extends AsyncTask<String, String, String> {
+        String output = "";
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Processing");
+            dialog.setCancelable(true);
+            dialog.show();
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                server_url = "https://enlightshopping.com/api/api/getsubcategory?category_id=72";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e("sever_url>>>>>>>>>", server_url);
+            output = HttpHandler.makeServiceCall(server_url);
+            //   Log.e("getcomment_url", output);
+            System.out.println("getcomment_url" + output);
+            return output;
+        }
+
+        @Override
+        protected void onPostExecute(String output) {
+            if (output == null) {
+                dialog.dismiss();
+            } else {
+                try {
+                    dialog.dismiss();
+                    JSONObject obj = new JSONObject(output);
+                    String responce = obj.getString("responce");
+                    JSONArray Data_array = obj.getJSONArray("data");
+                    for (int i = 0; i < Data_array.length(); i++) {
+                        JSONObject c = Data_array.getJSONObject(i);
+                        String category_id = c.getString("category_id");
+                        String image = c.getString("image");
+                        String parent_id = c.getString("parent_id");
+                        String top = c.getString("top");
+                        String column = c.getString("column");
+                        String sort_order = c.getString("sort_order");
+                        String status = c.getString("status");
+                        String date_added = c.getString("date_added");
+                        String date_modified = c.getString("date_modified");
+                        String language_id = c.getString("language_id");
+                        String name = c.getString("name");
+                        String description = c.getString("description");
+                        String meta_description = c.getString("meta_description");
+                        String meta_keyword = c.getString("meta_keyword");
+                        GemList.add(new GemsCategory(category_id, image, parent_id, top, column, sort_order, status, date_added, date_modified,
+                                language_id,name,description,meta_description,meta_keyword));
+
+                    }
+
+                    GemAdapter = new Gems_adapter(getActivity(), GemList);
+//                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                    GemsList.setLayoutManager(mLayoutManager);
+                    GemsList.setItemAnimator(new DefaultItemAnimator());
+                    GemsList.setAdapter(GemAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //  dialog.dismiss();
+                }
+                super.onPostExecute(output);
+            }
+        }
+    }
+
 }

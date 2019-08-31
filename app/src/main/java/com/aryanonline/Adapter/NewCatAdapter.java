@@ -1,9 +1,9 @@
 package com.aryanonline.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.aryanonline.Config.BaseURL;
 import com.aryanonline.Model.NewCategory;
-import com.aryanonline.Model.OfferModel;
-import com.aryanonline.Model.TopModel;
-import com.aryanonline.NewActivity;
 import com.aryanonline.NewSubActivity;
-import com.aryanonline.R;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -42,7 +35,7 @@ public class NewCatAdapter extends RecyclerView.Adapter<NewCatAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
 
-            nameOnly = (TextView) view.findViewById(R.id.nameOnly);
+            nameOnly = (TextView) view.findViewById(com.aryanonline.R.id.nameOnly);
            // idProductImage = (ImageView) view.findViewById(R.id.idProductImage);
          //   card = (LinearLayout) view.findViewById(R.id.card_view);
         }
@@ -59,7 +52,7 @@ public class NewCatAdapter extends RecyclerView.Adapter<NewCatAdapter.ViewHolder
     @Override
     public NewCatAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.new_cat_rw, parent, false);
+                .inflate(com.aryanonline.R.layout.new_cat_rw, parent, false);
 
         return new NewCatAdapter.ViewHolder(itemView);
     }
@@ -74,7 +67,8 @@ public class NewCatAdapter extends RecyclerView.Adapter<NewCatAdapter.ViewHolder
             public void onClick(View v) {
                 NewCategory newCategory = cctList.get(position);
                 Intent intent = new Intent(context, NewSubActivity.class);
-                intent.putExtra("NewCategory", newCategory);
+                intent.putExtra("NewCategory", newCategory.getCategoryId());
+                Log.e("Cat Id is : ",">>>---___ "+newCategory.getCategoryId());
                 context.startActivity(intent);
                // ((Activity)context).finish();
             }

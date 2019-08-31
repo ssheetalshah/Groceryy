@@ -11,7 +11,6 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -32,11 +31,18 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.aryanonline.Adapter.DeAdapter;
-import com.aryanonline.Adapter.TopViewAdapter;
+import com.aryanonline.Adapter.Delivery_get_address_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
 import com.aryanonline.Model.DModel;
-import com.aryanonline.Model.TopModel;
-import com.aryanonline.ViewDeatilsActivity;
+import com.aryanonline.Model.Delivery_address_model;
+import com.aryanonline.util.AppPreference;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
+import com.aryanonline.util.DatabaseHandler;
 import com.aryanonline.util.HttpHandler;
+import com.aryanonline.util.Session_management;
 import com.daimajia.swipe.util.Attributes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -54,18 +60,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.aryanonline.Adapter.Delivery_get_address_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Delivery_address_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.AppPreference;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.DatabaseHandler;
-import com.aryanonline.util.Session_management;
 
 
 public class Delivery_fragment extends Fragment implements View.OnClickListener {
@@ -124,26 +118,26 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_delivery_time, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_delivery_time, container, false);
 
         Guestuser = Session_management.getUsername(getActivity());
         Guestmobile = Session_management.getMobileNo(getActivity());
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.delivery));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.delivery));
 
-        tv_guestuser = (TextView) view.findViewById(R.id.tv_guestuser);
+        tv_guestuser = (TextView) view.findViewById(com.aryanonline.R.id.tv_guestuser);
         tv_guestuser.setText(AppPreference.getName(getActivity()));
 
-        tv_guestmobile = (TextView) view.findViewById(R.id.tv_guestmobile);
+        tv_guestmobile = (TextView) view.findViewById(com.aryanonline.R.id.tv_guestmobile);
         tv_guestmobile.setText(AppPreference.getMobile(getActivity()));
 
-        tv_date = (TextView) view.findViewById(R.id.tv_deli_date);
-        tv_time = (TextView) view.findViewById(R.id.tv_deli_fromtime);
-        tv_add_address = (TextView) view.findViewById(R.id.tv_deli_add_address);
-        tv_total = (TextView) view.findViewById(R.id.tv_deli_total);
-        tv_item = (TextView) view.findViewById(R.id.tv_deli_item);
-        btn_checkout = (Button) view.findViewById(R.id.btn_deli_checkout);
-        rv_address = (RecyclerView) view.findViewById(R.id.rv_deli_address);
+        tv_date = (TextView) view.findViewById(com.aryanonline.R.id.tv_deli_date);
+        tv_time = (TextView) view.findViewById(com.aryanonline.R.id.tv_deli_fromtime);
+        tv_add_address = (TextView) view.findViewById(com.aryanonline.R.id.tv_deli_add_address);
+        tv_total = (TextView) view.findViewById(com.aryanonline.R.id.tv_deli_total);
+        tv_item = (TextView) view.findViewById(com.aryanonline.R.id.tv_deli_item);
+        btn_checkout = (Button) view.findViewById(com.aryanonline.R.id.btn_deli_checkout);
+        rv_address = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_deli_address);
         rv_address.setLayoutManager(new LinearLayoutManager(getActivity()));
         //tv_socity = (TextView) view.findViewById(R.id.tv_deli_socity);
         //et_address = (EditText) view.findViewById(R.id.et_deli_address);
@@ -187,12 +181,12 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
                 Date date1 = inputFormat.parse(getdate);
                 String str = outputFormat.format(date1);
 
-                tv_date.setText(getResources().getString(R.string.delivery_date) + str);
+                tv_date.setText(getResources().getString(com.aryanonline.R.string.delivery_date) + str);
 
             } catch (ParseException e) {
                 e.printStackTrace();
 
-                tv_date.setText(getResources().getString(R.string.delivery_date) + getdate);
+                tv_date.setText(getResources().getString(com.aryanonline.R.string.delivery_date) + getdate);
             }
 
             tv_time.setText(time);
@@ -206,24 +200,24 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.btn_deli_checkout) {
+        if (id == com.aryanonline.R.id.btn_deli_checkout) {
             attemptOrder();
-        } else if (id == R.id.tv_deli_date) {
+        } else if (id == com.aryanonline.R.id.tv_deli_date) {
             getdate();
-        } else if (id == R.id.tv_deli_fromtime) {
+        } else if (id == com.aryanonline.R.id.tv_deli_fromtime) {
 
             if (TextUtils.isEmpty(getdate)) {
-                Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.please_select_date), Toast.LENGTH_SHORT).show();
             } else {
                 Bundle args = new Bundle();
                 Fragment fm = new View_time_fragment();
                 args.putString("date", getdate);
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
             }
-        } else if (id == R.id.tv_deli_add_address) {
+        } else if (id == com.aryanonline.R.id.tv_deli_add_address) {
 
 
            /* CustomDialogClass cdd=new CustomDialogClass(getActivity());
@@ -233,7 +227,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
             Fragment fm = new Add_delivery_address_fragment();
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+            fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("ListModel", delivery_address_modelList);
@@ -251,7 +245,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                R.style.datepicker,
+                com.aryanonline.R.style.datepicker,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -260,7 +254,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
                         getdate = "" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
 
-                        tv_date.setText(getResources().getString(R.string.delivery_date) + getdate);
+                        tv_date.setText(getResources().getString(com.aryanonline.R.string.delivery_date) + getdate);
 
                         try {
                             String inputPattern = "yyyy-MM-dd";
@@ -271,10 +265,10 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
                             Date date = inputFormat.parse(getdate);
                             String str = outputFormat.format(date);
 
-                            tv_date.setText(getResources().getString(R.string.delivery_date) + str);
+                            tv_date.setText(getResources().getString(com.aryanonline.R.string.delivery_date) + str);
                         } catch (ParseException e) {
                             e.printStackTrace();
-                            tv_date.setText(getResources().getString(R.string.delivery_date) + getdate);
+                            tv_date.setText(getResources().getString(com.aryanonline.R.string.delivery_date) + getdate);
                         }
 
                     }
@@ -294,10 +288,10 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
         boolean cancel = false;
 
         if (TextUtils.isEmpty(getdate)) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
             cancel = true;
         } else if (TextUtils.isEmpty(gettime)) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
             cancel = true;
         }
 
@@ -306,11 +300,11 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
                 location_id = adapter.getlocation_id();
                 address = adapter.getaddress();
             } else {
-                Toast.makeText(getActivity(), getResources().getString(R.string.please_select_address), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.please_select_address), Toast.LENGTH_SHORT).show();
                 cancel = true;
             }
         } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_add_address), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.please_add_address), Toast.LENGTH_SHORT).show();
             cancel = true;
         }
 
@@ -333,7 +327,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
             args.putString("deli_charges", deli_charges);
             fm.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+            fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
 
         }
@@ -393,7 +387,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     if (getActivity() != null) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

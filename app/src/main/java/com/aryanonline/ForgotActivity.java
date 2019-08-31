@@ -1,8 +1,8 @@
 package com.aryanonline;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,16 +19,15 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
 
 public class ForgotActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,11 +45,11 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_forgot);
+        setContentView(com.aryanonline.R.layout.activity_forgot);
 
-        et_email = (EditText) findViewById(R.id.et_login_email);
-        tv_email = (TextView) findViewById(R.id.tv_login_email);
-        btn_continue = (Button) findViewById(R.id.btnContinue);
+        et_email = (EditText) findViewById(com.aryanonline.R.id.et_login_email);
+        tv_email = (TextView) findViewById(com.aryanonline.R.id.tv_login_email);
+        btn_continue = (Button) findViewById(com.aryanonline.R.id.btnContinue);
 
         btn_continue.setOnClickListener(this);
     }
@@ -59,16 +58,16 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.btnContinue) {
+        if (id == com.aryanonline.R.id.btnContinue) {
             attemptForgot();
         }
     }
 
     private void attemptForgot() {
 
-        tv_email.setText(getResources().getString(R.string.tv_login_email));
+        tv_email.setText(getResources().getString(com.aryanonline.R.string.tv_login_email));
 
-        tv_email.setTextColor(getResources().getColor(R.color.color_3));
+        tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
 
         String getemail = et_email.getText().toString();
 
@@ -76,12 +75,12 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
         View focusView = null;
 
         if (TextUtils.isEmpty(getemail)) {
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         } else if (!isEmailValid(getemail)) {
-            tv_email.setText(getResources().getString(R.string.invalide_email_address));
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setText(getResources().getString(com.aryanonline.R.string.invalide_email_address));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         }
@@ -132,7 +131,7 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
 
                         Toast.makeText(ForgotActivity.this, "" + error, Toast.LENGTH_SHORT).show();
 
-                        Intent i = new Intent(ForgotActivity.this,LoginActivity.class);
+                        Intent i = new Intent(ForgotActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();
 
@@ -149,7 +148,7 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(ForgotActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotActivity.this, getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

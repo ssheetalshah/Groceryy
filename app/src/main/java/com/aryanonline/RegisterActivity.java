@@ -3,8 +3,8 @@ package com.aryanonline;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.aryanonline.util.AppPreference;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,10 +34,6 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import com.aryanonline.util.AppPreference;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.Session_management;
 
 public class RegisterActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
@@ -56,20 +56,20 @@ public class RegisterActivity extends AppCompatActivity implements
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_register);
+        setContentView(com.aryanonline.R.layout.activity_register);
 
         sessionManagement = new Session_management(RegisterActivity.this);
 
-        et_phone = (EditText) findViewById(R.id.et_reg_phone);
-        et_name = (EditText) findViewById(R.id.et_reg_name);
-        et_last_name1 = (EditText) findViewById(R.id.et_last_name1);
-        et_password = (EditText) findViewById(R.id.et_reg_password);
-        et_email = (EditText) findViewById(R.id.et_reg_email);
-        tv_password = (TextView) findViewById(R.id.tv_reg_password);
-        tv_phone = (TextView) findViewById(R.id.tv_reg_phone);
-        tv_name = (TextView) findViewById(R.id.tv_reg_name);
-        tv_email = (TextView) findViewById(R.id.tv_reg_email);
-        btn_register = (Button) findViewById(R.id.btnRegister);
+        et_phone = (EditText) findViewById(com.aryanonline.R.id.et_reg_phone);
+        et_name = (EditText) findViewById(com.aryanonline.R.id.et_reg_name);
+        et_last_name1 = (EditText) findViewById(com.aryanonline.R.id.et_last_name1);
+        et_password = (EditText) findViewById(com.aryanonline.R.id.et_reg_password);
+        et_email = (EditText) findViewById(com.aryanonline.R.id.et_reg_email);
+        tv_password = (TextView) findViewById(com.aryanonline.R.id.tv_reg_password);
+        tv_phone = (TextView) findViewById(com.aryanonline.R.id.tv_reg_phone);
+        tv_name = (TextView) findViewById(com.aryanonline.R.id.tv_reg_name);
+        tv_email = (TextView) findViewById(com.aryanonline.R.id.tv_reg_email);
+        btn_register = (Button) findViewById(com.aryanonline.R.id.btnRegister);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,15 +103,15 @@ public class RegisterActivity extends AppCompatActivity implements
 
     private void attemptRegister() {
 
-        tv_phone.setText(getResources().getString(R.string.et_login_phone_hint));
-        tv_email.setText(getResources().getString(R.string.tv_login_email));
-        tv_name.setText(getResources().getString(R.string.tv_reg_name_hint));
-        tv_password.setText(getResources().getString(R.string.tv_login_password));
+        tv_phone.setText(getResources().getString(com.aryanonline.R.string.et_login_phone_hint));
+        tv_email.setText(getResources().getString(com.aryanonline.R.string.tv_login_email));
+        tv_name.setText(getResources().getString(com.aryanonline.R.string.tv_reg_name_hint));
+        tv_password.setText(getResources().getString(com.aryanonline.R.string.tv_login_password));
 
-        tv_name.setTextColor(getResources().getColor(R.color.color_3));
-        tv_phone.setTextColor(getResources().getColor(R.color.color_3));
-        tv_password.setTextColor(getResources().getColor(R.color.color_3));
-        tv_email.setTextColor(getResources().getColor(R.color.color_3));
+        tv_name.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_phone.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_password.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
 
       /*  String getphone = et_phone.getText().toString();
         String getname = et_name.getText().toString();
@@ -132,40 +132,40 @@ public class RegisterActivity extends AppCompatActivity implements
         View focusView = null;
 
         if (TextUtils.isEmpty(getphone)) {
-            tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_phone.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_phone;
             cancel = true;
         } else if (!isPhoneValid(getphone)) {
-            tv_phone.setText(getResources().getString(R.string.phone_too_short));
-            tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_phone.setText(getResources().getString(com.aryanonline.R.string.phone_too_short));
+            tv_phone.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_phone;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getname)) {
-            tv_name.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_name.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_name;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getpassword)) {
-            tv_password.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_password.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_password;
             cancel = true;
         } else if (!isPasswordValid(getpassword)) {
-            tv_password.setText(getResources().getString(R.string.password_too_short));
-            tv_password.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_password.setText(getResources().getString(com.aryanonline.R.string.password_too_short));
+            tv_password.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_password;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getemail)) {
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         } else if (!isEmailValid(getemail)) {
-            tv_email.setText(getResources().getString(R.string.invalide_email_address));
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setText(getResources().getString(com.aryanonline.R.string.invalide_email_address));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         }

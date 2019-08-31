@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.aryanonline.Config.BaseURL;
 import com.aryanonline.Model.TopModel;
 import com.aryanonline.NewActivity;
-import com.aryanonline.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -39,10 +38,10 @@ public class TopViewAdapter extends RecyclerView.Adapter<TopViewAdapter.ViewHold
         public ViewHolder(View view) {
             super(view);
 
-            idProductName = (TextView) view.findViewById(R.id.idProductName);
-            idProductprice = (TextView) view.findViewById(R.id.idProductprice);
-            idProductImage = (ImageView) view.findViewById(R.id.idProductImage);
-            mainButton = (LinearLayout) view.findViewById(R.id.mainButton);
+            idProductName = (TextView) view.findViewById(com.aryanonline.R.id.idProductName);
+            idProductprice = (TextView) view.findViewById(com.aryanonline.R.id.idProductprice);
+            idProductImage = (ImageView) view.findViewById(com.aryanonline.R.id.idProductImage);
+            mainButton = (LinearLayout) view.findViewById(com.aryanonline.R.id.mainButton);
             // card = (LinearLayout) view.findViewById(R.id.card_view);
         }
     }
@@ -58,7 +57,7 @@ public class TopViewAdapter extends RecyclerView.Adapter<TopViewAdapter.ViewHold
     @Override
     public TopViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.topview_row, parent, false);
+                .inflate(com.aryanonline.R.layout.topview_row, parent, false);
 
         return new TopViewAdapter.ViewHolder(itemView);
     }
@@ -73,7 +72,7 @@ public class TopViewAdapter extends RecyclerView.Adapter<TopViewAdapter.ViewHold
         viewHolder.idProductprice.setText(ss);
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + Image)
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.aryanonline.R;
-
 import java.util.ArrayList;
 
 public class MyAdapterrr extends PagerAdapter {
@@ -35,9 +33,9 @@ public class MyAdapterrr extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
-        View myImageLayout = inflater.inflate(R.layout.slide, view, false);
+        View myImageLayout = inflater.inflate(com.aryanonline.R.layout.slide, view, false);
         ImageView myImage = (ImageView) myImageLayout
-                .findViewById(R.id.image);
+                .findViewById(com.aryanonline.R.id.image);
         myImage.setImageResource(images.get(position));
         view.addView(myImageLayout, 0);
         return myImageLayout;

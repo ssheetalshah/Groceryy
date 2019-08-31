@@ -45,6 +45,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'me.relex:circleindicator:1.2.2@aar'
+
+    //for font type
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
 }
 // ADD THIS AT THE BOTTOM
 //apply plugin: 'com.google.gms.google-services'

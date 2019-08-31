@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.aryanonline.MainActivity;
-import com.aryanonline.R;
 
 
 public class Thanks_fragment extends Fragment implements View.OnClickListener {
@@ -33,9 +32,9 @@ public class Thanks_fragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_order_thanks, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_order_thanks, container, false);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.thank_you));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.thank_you));
 
         // handle the touch event if true
         view.setFocusableInTouchMode(true);
@@ -48,7 +47,7 @@ public class Thanks_fragment extends Fragment implements View.OnClickListener {
 
                     Fragment fm = new Home_fragment();
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                    fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
                     return true;
                 }
@@ -58,9 +57,9 @@ public class Thanks_fragment extends Fragment implements View.OnClickListener {
 
         String data = getArguments().getString("msg");
 
-        tv_info = (TextView) view.findViewById(R.id.tv_thank_info);
-        btn_home = (Button) view.findViewById(R.id.btn_thank_home);
-        btn_order = (Button) view.findViewById(R.id.btn_thank_order);
+        tv_info = (TextView) view.findViewById(com.aryanonline.R.id.tv_thank_info);
+        btn_home = (Button) view.findViewById(com.aryanonline.R.id.btn_thank_home);
+        btn_order = (Button) view.findViewById(com.aryanonline.R.id.btn_thank_order);
 
         tv_info.setText(Html.fromHtml(data));
 
@@ -74,17 +73,17 @@ public class Thanks_fragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.btn_thank_home) {
+        if (id == com.aryanonline.R.id.btn_thank_home) {
 
             Fragment fm = new Home_fragment();
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+            fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
-        } else if (id == R.id.btn_thank_order) {
+        } else if (id == com.aryanonline.R.id.btn_thank_order) {
 
             Fragment fm = new My_order_fragment();
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+            fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
         }
 

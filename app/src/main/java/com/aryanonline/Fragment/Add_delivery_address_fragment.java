@@ -3,10 +3,8 @@ package com.aryanonline.Fragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +17,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.CountryModel;
+import com.aryanonline.Model.Delivery_address_model;
+import com.aryanonline.Model.StateModel;
+import com.aryanonline.util.AppPreference;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.HttpHandler;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,23 +40,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.LoginActivity;
-import com.aryanonline.Model.CountryModel;
-import com.aryanonline.Model.Delivery_address_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.Model.StateModel;
-import com.aryanonline.R;
-import com.aryanonline.util.AppPreference;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.HttpHandler;
-import com.aryanonline.util.Session_management;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -110,21 +95,21 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_delivery_address, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_add_delivery_address, container, false);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.add_delivery_address));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.add_delivery_address));
 
         sessionManagement = new Session_management(getActivity());
 
-        address_1 = (EditText) view.findViewById(R.id.address_1);
-        address_2 = (EditText) view.findViewById(R.id.address_2);
-        postcode = view.findViewById(R.id.postcodeed);
-        et_add_adres_pin = (EditText) view.findViewById(R.id.comp);
-        city = (EditText) view.findViewById(R.id.city);
-        spinCountry = (Spinner) view.findViewById(R.id.spinCountry);
-        spinState = (Spinner) view.findViewById(R.id.spinState);
-        city = (EditText) view.findViewById(R.id.city);
-        btn_update = (Button) view.findViewById(R.id.btn_add_adres_edit);
+        address_1 = (EditText) view.findViewById(com.aryanonline.R.id.address_1);
+        address_2 = (EditText) view.findViewById(com.aryanonline.R.id.address_2);
+        postcode = view.findViewById(com.aryanonline.R.id.postcodeed);
+        et_add_adres_pin = (EditText) view.findViewById(com.aryanonline.R.id.comp);
+        city = (EditText) view.findViewById(com.aryanonline.R.id.city);
+        spinCountry = (Spinner) view.findViewById(com.aryanonline.R.id.spinCountry);
+        spinState = (Spinner) view.findViewById(com.aryanonline.R.id.spinState);
+        city = (EditText) view.findViewById(com.aryanonline.R.id.city);
+        btn_update = (Button) view.findViewById(com.aryanonline.R.id.btn_add_adres_edit);
         String getsocity_name = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
         String getsocity_id = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
 
@@ -194,7 +179,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.btn_add_adres_edit) {
+        if (id == com.aryanonline.R.id.btn_add_adres_edit) {
             attemptEditProfile();
         }
     }
@@ -323,7 +308,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                         Fragment fm = new Delivery_fragment();
                         fm.setArguments(args);
                         FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                                 .addToBackStack(null).commit();
                     } else {
                         Toast.makeText(getActivity(), "Some Problem", Toast.LENGTH_SHORT).show();
@@ -413,7 +398,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
 
                     }
-                    countryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_row, strContryList);
+                    countryAdapter = new ArrayAdapter<String>(getActivity(), com.aryanonline.R.layout.spinner_row, strContryList);
                     countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinCountry.setAdapter(countryAdapter);
 
@@ -475,7 +460,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                         stateList.add(new StateModel(zone_id, country_id, name, code, status));
                     }
 
-                    stateAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_row, strStateList);
+                    stateAdapter = new ArrayAdapter<String>(getActivity(), com.aryanonline.R.layout.spinner_row, strStateList);
                     stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinState.setAdapter(stateAdapter);
 

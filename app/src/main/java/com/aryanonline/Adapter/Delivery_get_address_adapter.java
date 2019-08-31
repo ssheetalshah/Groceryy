@@ -22,6 +22,13 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.Fragment.Add_delivery_address_fragment;
+import com.aryanonline.Model.Delivery_address_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
+import com.aryanonline.util.Session_management;
 import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
@@ -32,16 +39,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Fragment.Add_delivery_address_fragment;
-import com.aryanonline.Model.Delivery_address_model;
-import com.aryanonline.AppController;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.Session_management;
-
 
 
 public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_get_address_adapter.MyViewHolder> {
@@ -68,16 +65,16 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         public MyViewHolder(View view) {
             super(view);
 
-            swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
-            buttonDelete = (Button) itemView.findViewById(R.id.delete);
-            btn_edit = (Button) itemView.findViewById(R.id.edit);
+            swipeLayout = (SwipeLayout) itemView.findViewById(com.aryanonline.R.id.swipe);
+            buttonDelete = (Button) itemView.findViewById(com.aryanonline.R.id.delete);
+            btn_edit = (Button) itemView.findViewById(com.aryanonline.R.id.edit);
 
            // tv_address = (TextView) view.findViewById(R.id.tv_adres_address);
-            tv_name = (TextView) view.findViewById(R.id.tv_adres_username);
-            tv_phone = (TextView) view.findViewById(R.id.tv_adres_phone);
-            tv_charges = (TextView) view.findViewById(R.id.tv_adres_charge);
-            tv_adres_deliver =(TextView)view.findViewById(R.id.tv_adres_deliver);
-            rb_select = (RadioButton) view.findViewById(R.id.rb_adres);
+            tv_name = (TextView) view.findViewById(com.aryanonline.R.id.tv_adres_username);
+            tv_phone = (TextView) view.findViewById(com.aryanonline.R.id.tv_adres_phone);
+            tv_charges = (TextView) view.findViewById(com.aryanonline.R.id.tv_adres_charge);
+            tv_adres_deliver =(TextView)view.findViewById(com.aryanonline.R.id.tv_adres_deliver);
+            rb_select = (RadioButton) view.findViewById(com.aryanonline.R.id.rb_adres);
 
 
             rb_select.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +137,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
     @Override
     public Delivery_get_address_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_delivery_time_rv_test, parent, false);
+                .inflate(com.aryanonline.R.layout.row_delivery_time_rv_test, parent, false);
 
         context = parent.getContext();
 
@@ -235,7 +232,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
                 args.putString("house", mList.getHouse_no());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
             }
         });
@@ -258,9 +255,9 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
                 "\n" + context.getResources().getString(R.string.house_no) + gethouse +
                 "\n" + context.getResources().getString(R.string.socity) + getsocity;*/
 
-        String address = context.getResources().getString(R.string.reciver_name) + getname + "\n" + context.getResources().getString(R.string.reciver_mobile) + getphone +
-                "\n" + context.getResources().getString(R.string.pincode) + getpin +
-                "\n" + context.getResources().getString(R.string.house_no) + gethouse ;
+        String address = context.getResources().getString(com.aryanonline.R.string.reciver_name) + getname + "\n" + context.getResources().getString(com.aryanonline.R.string.reciver_mobile) + getphone +
+                "\n" + context.getResources().getString(com.aryanonline.R.string.pincode) + getpin +
+                "\n" + context.getResources().getString(com.aryanonline.R.string.house_no) + gethouse ;
 
         return address;
     }
@@ -271,7 +268,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
 
     @Override
     public int getSwipeLayoutResourceId(int position) {
-        return R.id.swipe;
+        return com.aryanonline.R.id.swipe;
     }
 
     /**
@@ -316,7 +313,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(context, context.getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

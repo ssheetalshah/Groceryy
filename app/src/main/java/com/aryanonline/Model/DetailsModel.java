@@ -1,9 +1,6 @@
 package com.aryanonline.Model;
 
-import com.aryanonline.NewActivity;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class DetailsModel implements Serializable {
 

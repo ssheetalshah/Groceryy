@@ -1,10 +1,15 @@
 package com.aryanonline.Adapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +29,11 @@ import com.aryanonline.util.DatabaseHandler;
 import com.aryanonline.util.Session_management;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +63,11 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
     String finalStatus = "";
     DatabaseHandler dbHandler;
     String prId, prName, prModel, prStock, prPrice, prDescrption;
+    ArrayList<String> slider_image_list;
+    SlideImage sliderPagerAdapter;
+    private TextView[] dots;
+    int page_position = 0;
+    LinearLayout ll_dots;
 
     private Session_management sessionManagement;
     String Image;
@@ -60,7 +75,8 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tv_title, tv_price, tv_total, tv_contetiy, tv_add, mrpPrice, tv_subcat_model;
-        public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
+        public ImageView iv_plus, iv_minus, iv_remove;
+        ViewPager imgSlider;
         ImageView wwish, wwishred, compare;
         LinearLayout mainButton;
         DatabaseHandler dbHandler;
@@ -68,44 +84,43 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
 
         public ViewHolder(View view) {
             super(view);
-            tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
-            tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
-            tv_subcat_model = (TextView) view.findViewById(R.id.tv_subcat_model);
-            tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
-            tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
-            tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
-            iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
-            iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
-            iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
-            iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
-            mrpPrice = (TextView) view.findViewById(R.id.mrpPrice);
-            mainButton = (LinearLayout) view.findViewById(R.id.mainButton);
-            wwish = (ImageView) view.findViewById(R.id.wwish);
-            wwishred = (ImageView) view.findViewById(R.id.wwishred);
-            compare = (ImageView) view.findViewById(R.id.compare);
+            tv_title = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_title);
+            tv_price = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_price);
+            tv_subcat_model = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_model);
+            tv_total = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_total);
+            tv_contetiy = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_contetiy);
+            tv_add = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_add);
+            imgSlider = (ViewPager) view.findViewById(com.aryanonline.R.id.iv_subcat_img);
+            ll_dots = (LinearLayout) view.findViewById(R.id.ll_dots);
+            iv_plus = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_plus);
+            iv_minus = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_minus);
+            iv_remove = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_remove);
+            mrpPrice = (TextView) view.findViewById(com.aryanonline.R.id.mrpPrice);
+            mainButton = (LinearLayout) view.findViewById(com.aryanonline.R.id.mainButton);
+            wwish = (ImageView) view.findViewById(com.aryanonline.R.id.wwish);
+            wwishred = (ImageView) view.findViewById(com.aryanonline.R.id.wwishred);
+            compare = (ImageView) view.findViewById(com.aryanonline.R.id.compare);
 
             // card = (LinearLayout) view.findViewById(R.id.card_view);
         }
-
     }
 
-    public static Context mContext;
+    Activity mactivity;
 
-
-    public DetailsAdapter(Context mContext, ArrayList<DetailsModel> det_list, ArrayList<HashMap<String, String>> list) {
-        context = mContext;
+    public DetailsAdapter(Activity activity, ArrayList<DetailsModel> det_list, ArrayList<HashMap<String, String>> list) {
+        this.mactivity = activity;
+        this.context = activity;
         this.DetList = det_list;
         this.list = list;
 
-
-        dbHandler = new DatabaseHandler(mContext);
+        dbHandler = new DatabaseHandler(activity);
 
     }
 
     @Override
     public DetailsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.detail_row, parent, false);
+                .inflate(com.aryanonline.R.layout.detail_row, parent, false);
 
         return new DetailsAdapter.ViewHolder(itemView);
     }
@@ -128,13 +143,54 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
         Image = detailsModel.getImage();
         String ss = s.indexOf(".") < 0 ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
         viewHolder.tv_total.setText(ss);
-        Glide.with(context)
+        slider_image_list = new ArrayList<>();
+        slider_image_list.add(BaseURL.IMG_PRODUCT_URL+Image);
+        slider_image_list.add(BaseURL.IMG_PRODUCT_URL+Image);
+
+        sliderPagerAdapter = new SlideImage(mactivity, slider_image_list);
+        viewHolder.imgSlider.setAdapter(sliderPagerAdapter);
+        addBottomDots(0);
+        viewHolder.imgSlider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                addBottomDots(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+ /*              Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + Image)
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
-                .into(viewHolder.iv_logo);
+                .into(viewHolder.imgSlider);        */
+
+
+/*      Hash_file_maps = new HashMap<String, String>();
+        Hash_file_maps.put("name",BaseURL.IMG_PRODUCT_URL+Image);
+
+        for(String name : Hash_file_maps.keySet()){
+
+            TextSliderView textSliderView = new TextSliderView(Context);
+            textSliderView
+                    .image(Hash_file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("extra",name);
+            viewHolder.imgSlider.addSlider(textSliderView);
+        }       */
+
 
         viewHolder.iv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +199,6 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
                 qty = qty + 1;
 
                 viewHolder.tv_contetiy.setText(String.valueOf(qty));
-
 //
 //                dbHandler.setCart(map, Float.valueOf(viewHolder.tv_contetiy.getText().toString()));
 //                Toast.makeText(context, "at cart value "+ dbHandler.setCart(map, Float.valueOf(viewHolder.tv_contetiy.getText().toString())), Toast.LENGTH_SHORT).show();
@@ -205,7 +260,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
                 dbHandler.setCartSimple(map, Float.valueOf(viewHolder.tv_contetiy.getText().toString()), position);
                 // Toast.makeText(context, "at cart value "+ dbHandler.setCartSimple(map, Float.valueOf(viewHolder.tv_contetiy.getText().toString()) ,position), Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show();
-                viewHolder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                viewHolder.tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
                /* Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id").toString()));
                 Double price = Double.parseDouble(map.get("price").toString());*/
 
@@ -243,13 +298,14 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
     }
 
     //------------------------------------
+    //------------------------------------
 
     class SendJsonData extends AsyncTask<String, String, String> {
 
         ProgressDialog dialog;
 
         protected void onPreExecute() {
-            dialog = new ProgressDialog(context);
+            dialog = new ProgressDialog(mactivity);
             dialog.show();
 
         }
@@ -530,8 +586,23 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
             }
             return result.toString();
         }
+    }
 
 
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[slider_image_list.size()];
+
+        ll_dots.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(mactivity);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(Color.parseColor("#C9C7C7"));
+            ll_dots.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(Color.parseColor("#4E4C4C"));
     }
 
 

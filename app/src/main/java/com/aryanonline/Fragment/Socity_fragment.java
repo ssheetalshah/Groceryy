@@ -19,6 +19,15 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Adapter.Socity_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Socity_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonArrayRequest;
+import com.aryanonline.util.RecyclerTouchListener;
+import com.aryanonline.util.Session_management;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,17 +36,6 @@ import org.json.JSONArray;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.aryanonline.Adapter.Socity_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Socity_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonArrayRequest;
-import com.aryanonline.util.RecyclerTouchListener;
-import com.aryanonline.util.Session_management;
 
 
 public class Socity_fragment extends Fragment {
@@ -63,12 +61,12 @@ public class Socity_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_socity, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_socity, container, false);
 
         //String getpincode = getArguments().getString("pincode");
 
-        et_search = (EditText) view.findViewById(R.id.et_socity_search);
-        rv_socity = (RecyclerView) view.findViewById(R.id.rv_socity);
+        et_search = (EditText) view.findViewById(com.aryanonline.R.id.et_socity_search);
+        rv_socity = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_socity);
         rv_socity.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         et_search.addTextChangedListener(new TextWatcher() {
@@ -149,7 +147,7 @@ public class Socity_fragment extends Fragment {
 
                 if(socity_modelList.isEmpty()){
                     if(getActivity() != null) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -160,7 +158,7 @@ public class Socity_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     if(getActivity() != null) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

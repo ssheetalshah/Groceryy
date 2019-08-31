@@ -20,6 +20,15 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Adapter.My_order_detail_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.My_order_detail_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonArrayRequest;
+import com.aryanonline.util.CustomVolleyJsonRequest;
+import com.aryanonline.util.Session_management;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,17 +41,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.aryanonline.Adapter.My_order_detail_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.My_order_detail_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonArrayRequest;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.Session_management;
 
 
 public class My_order_detail_fragment extends Fragment {
@@ -70,14 +68,14 @@ public class My_order_detail_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_my_order_detail, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_my_order_detail, container, false);
 
-        tv_date = (TextView) view.findViewById(R.id.tv_order_Detail_date);
-        tv_time = (TextView) view.findViewById(R.id.tv_order_Detail_time);
-        tv_delivery_charge = (TextView) view.findViewById(R.id.tv_order_Detail_deli_charge);
-        tv_total = (TextView) view.findViewById(R.id.tv_order_Detail_total);
-        btn_cancle = (Button) view.findViewById(R.id.btn_order_detail_cancle);
-        rv_detail_order = (RecyclerView) view.findViewById(R.id.rv_order_detail);
+        tv_date = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_date);
+        tv_time = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_time);
+        tv_delivery_charge = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_deli_charge);
+        tv_total = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_total);
+        btn_cancle = (Button) view.findViewById(com.aryanonline.R.id.btn_order_detail_cancle);
+        rv_detail_order = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_order_detail);
 
         rv_detail_order.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -95,9 +93,9 @@ public class My_order_detail_fragment extends Fragment {
         }
 
         tv_total.setText(total_rs);
-        tv_date.setText(getResources().getString(R.string.date) + date);
-        tv_time.setText(getResources().getString(R.string.time) + time);
-        tv_delivery_charge.setText(getResources().getString(R.string.delivery_charge) + deli_charge);
+        tv_date.setText(getResources().getString(com.aryanonline.R.string.date) + date);
+        tv_time.setText(getResources().getString(com.aryanonline.R.string.time) + time);
+        tv_delivery_charge.setText(getResources().getString(com.aryanonline.R.string.delivery_charge) + deli_charge);
 
         // check internet connection
         if (ConnectivityReceiver.isConnected()) {
@@ -119,14 +117,14 @@ public class My_order_detail_fragment extends Fragment {
     // alertdialog for cancle order
     private void showDeleteDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setMessage(getResources().getString(R.string.cancle_order_note));
-        alertDialog.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+        alertDialog.setMessage(getResources().getString(com.aryanonline.R.string.cancle_order_note));
+        alertDialog.setNegativeButton(getResources().getString(com.aryanonline.R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
-        alertDialog.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getResources().getString(com.aryanonline.R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -174,7 +172,7 @@ public class My_order_detail_fragment extends Fragment {
                 adapter.notifyDataSetChanged();
 
                 if (my_order_detail_modelList.isEmpty()) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -183,7 +181,7 @@ public class My_order_detail_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -235,7 +233,7 @@ public class My_order_detail_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

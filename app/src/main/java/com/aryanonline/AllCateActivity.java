@@ -2,8 +2,8 @@ package com.aryanonline;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +13,7 @@ import android.widget.Toast;
 import com.aryanonline.Adapter.DetailsAdapter;
 import com.aryanonline.Model.DetailsModel;
 import com.aryanonline.Model.SubCatModel;
-import com.aryanonline.Model.TopModel;
 import com.aryanonline.util.DatabaseHandler;
-import com.aryanonline.util.HttpHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,10 +33,10 @@ public class AllCateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_cate);
+        setContentView(com.aryanonline.R.layout.activity_all_cate);
 
 
-        getDetlist = (RecyclerView)findViewById(R.id.getDetlist);
+        getDetlist = (RecyclerView)findViewById(com.aryanonline.R.id.getDetlist);
 
         Toast.makeText(this, "New activity", Toast.LENGTH_SHORT).show();
         det_list = new ArrayList<>();

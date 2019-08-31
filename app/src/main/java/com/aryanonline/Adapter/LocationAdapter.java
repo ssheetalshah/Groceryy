@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import com.aryanonline.Model.My_Locatio_model;
-import com.aryanonline.R;
+
+import java.util.ArrayList;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
@@ -32,9 +31,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         public ViewHolder(View view) {
             super(view);
 
-            tv_office_add = (TextView) view.findViewById(R.id.tv_office_add);
-            tv_order_no = (TextView) view.findViewById(R.id.tv_order_no);
-            cardeview = (CardView) view.findViewById(R.id.card_view);
+            tv_office_add = (TextView) view.findViewById(com.aryanonline.R.id.tv_office_add);
+            tv_order_no = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_no);
+            cardeview = (CardView) view.findViewById(com.aryanonline.R.id.card_view);
         }
     }
 
@@ -49,7 +48,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public LocationAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_location, parent, false);
+                .inflate(com.aryanonline.R.layout.row_location, parent, false);
 
         return new LocationAdapter.ViewHolder(itemView);
     }

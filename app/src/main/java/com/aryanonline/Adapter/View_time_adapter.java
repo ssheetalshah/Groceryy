@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import com.aryanonline.R;
-
-
 
 public class View_time_adapter extends RecyclerView.Adapter<View_time_adapter.MyViewHolder> {
 
@@ -24,7 +21,7 @@ public class View_time_adapter extends RecyclerView.Adapter<View_time_adapter.My
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.tv_socity_name);
+            title = (TextView) view.findViewById(com.aryanonline.R.id.tv_socity_name);
         }
     }
 
@@ -35,7 +32,7 @@ public class View_time_adapter extends RecyclerView.Adapter<View_time_adapter.My
     @Override
     public View_time_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_socity_rv, parent, false);
+                .inflate(com.aryanonline.R.layout.row_socity_rv, parent, false);
 
         context = parent.getContext();
 

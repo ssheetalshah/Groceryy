@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
-
 public class AppPreference {
 
     public static final String SHARED_PREFERENCE_NAME = "EXPENSEMGT";

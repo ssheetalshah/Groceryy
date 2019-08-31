@@ -9,12 +9,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.aryanonline.Model.Socity_model;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.aryanonline.Model.Socity_model;
-import com.aryanonline.R;
-
 
 
 public class Socity_adapter extends RecyclerView.Adapter<Socity_adapter.MyViewHolder>
@@ -30,7 +28,7 @@ public class Socity_adapter extends RecyclerView.Adapter<Socity_adapter.MyViewHo
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.tv_socity_name);
+            title = (TextView) view.findViewById(com.aryanonline.R.id.tv_socity_name);
         }
     }
 
@@ -42,7 +40,7 @@ public class Socity_adapter extends RecyclerView.Adapter<Socity_adapter.MyViewHo
     @Override
     public Socity_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_socity_rv, parent, false);
+                .inflate(com.aryanonline.R.layout.row_socity_rv, parent, false);
 
         context = parent.getContext();
 

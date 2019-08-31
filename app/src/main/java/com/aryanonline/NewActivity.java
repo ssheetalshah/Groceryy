@@ -1,47 +1,32 @@
 package com.aryanonline;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.aryanonline.Adapter.DetailsAdapter;
-import com.aryanonline.Adapter.Product_adapter;
-import com.aryanonline.Adapter.TopAdapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Fragment.Home_fragment;
-import com.aryanonline.Fragment.Product_fragment;
 import com.aryanonline.Model.DetailsModel;
-import com.aryanonline.Model.Product_model;
 import com.aryanonline.Model.TopModel;
-import com.aryanonline.util.CustomVolleyJsonRequest;
 import com.aryanonline.util.DatabaseHandler;
-import com.aryanonline.util.HttpHandler;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class NewActivity extends AppCompatActivity {
     RecyclerView getDetlist;
@@ -50,13 +35,16 @@ public class NewActivity extends AppCompatActivity {
     private DatabaseHandler db;
     private DetailsAdapter detailsAdapter;
     String prId;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new);
+        setContentView(com.aryanonline.R.layout.activity_new);
 
-        getDetlist = (RecyclerView)findViewById(R.id.getDetlist);
+        activity = this;
+
+        getDetlist = (RecyclerView)findViewById(com.aryanonline.R.id.getDetlist);
 
         Toast.makeText(this, "New activity", Toast.LENGTH_SHORT).show();
         det_list = new ArrayList<>();
@@ -68,7 +56,18 @@ public class NewActivity extends AppCompatActivity {
 
         }
       new GetDetails().execute();
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("font/Roboto-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        Log.e("Attach Base Context","----------");
     }
 
     @Override
@@ -133,7 +132,7 @@ public class NewActivity extends AppCompatActivity {
                     db = new DatabaseHandler(NewActivity.this);
 
                     ArrayList<HashMap<String, String>> map = db.getCartAll();
-                    detailsAdapter = new DetailsAdapter(NewActivity.this, det_list,map);
+                    detailsAdapter = new DetailsAdapter(activity, det_list,map);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(NewActivity.this);
 //                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                     getDetlist.setLayoutManager(mLayoutManager);

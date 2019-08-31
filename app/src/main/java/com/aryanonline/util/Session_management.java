@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import java.util.HashMap;
-
 import com.aryanonline.LoginActivity;
 import com.aryanonline.MainActivity;
+
+import java.util.HashMap;
 
 import static com.aryanonline.Config.BaseURL.IS_LOGIN;
 import static com.aryanonline.Config.BaseURL.KEY_DATE;
@@ -24,6 +24,7 @@ import static com.aryanonline.Config.BaseURL.KEY_SOCITY_NAME;
 import static com.aryanonline.Config.BaseURL.KEY_TIME;
 import static com.aryanonline.Config.BaseURL.PREFS_NAME;
 import static com.aryanonline.Config.BaseURL.PREFS_NAME2;
+
 
 
 public class Session_management {

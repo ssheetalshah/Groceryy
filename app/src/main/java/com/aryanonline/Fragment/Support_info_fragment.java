@@ -17,6 +17,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.aryanonline.AppController;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Support_info_model;
+import com.aryanonline.util.ConnectivityReceiver;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -26,13 +30,6 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.aryanonline.Model.Support_info_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-
 
 
 public class Support_info_fragment extends Fragment {
@@ -54,9 +51,9 @@ public class Support_info_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_support_info, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_support_info, container, false);
 
-        tv_info = (TextView) view.findViewById(R.id.tv_info);
+        tv_info = (TextView) view.findViewById(com.aryanonline.R.id.tv_info);
 
         String geturl = getArguments().getString("url");
         String title = getArguments().getString("title");
@@ -121,7 +118,7 @@ public class Support_info_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

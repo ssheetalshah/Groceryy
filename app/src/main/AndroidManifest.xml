@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/aplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompareActivity"></activity>
+        <activity android:name=".CheckoutActivity"></activity>
+        <activity android:name=".CompareActivity" />
         <activity android:name=".AllCateActivity" />
         <activity android:name=".WishlistActivity" />
         <activity android:name=".NewSubActivity" />
@@ -23,6 +24,9 @@
         <activity android:name=".NewActivity" />
         <activity android:name=".Emi_Activity" />
         <activity android:name=".ShowProdDetail" />
+
+
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -63,6 +67,7 @@
             android:name=".ContinueActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CustomDialogClass" />
+        <activity android:name="."></activity>
     </application>
 
 </manifest>

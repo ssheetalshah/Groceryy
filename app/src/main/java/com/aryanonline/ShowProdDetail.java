@@ -1,10 +1,8 @@
 package com.aryanonline;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
@@ -35,21 +33,21 @@ public class ShowProdDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_prod_detail);
+        setContentView(com.aryanonline.R.layout.activity_show_prod_detail);
 
         getSupportActionBar().setTitle("Product Detail");
 
         dbcart = new DatabaseHandler(ShowProdDetail.this);
 
-        pro_emi=findViewById(R.id.pro_emi);
-        pro_warranty=findViewById(R.id.pro_warranty);
-        pro_offer=findViewById(R.id.pro_offer);
-        tv_waranty=findViewById(R.id.tv_waranty);
-        card_offer=findViewById(R.id.card_offer);
-        add_to_cart=findViewById(R.id.add_to_cart);
-        prod_img=findViewById(R.id.prod_img);
-        tv_prod_price=findViewById(R.id.tv_prod_price);
-        tv_prod_desc=findViewById(R.id.tv_prod_desc);
+        pro_emi=findViewById(com.aryanonline.R.id.pro_emi);
+        pro_warranty=findViewById(com.aryanonline.R.id.pro_warranty);
+        pro_offer=findViewById(com.aryanonline.R.id.pro_offer);
+        tv_waranty=findViewById(com.aryanonline.R.id.tv_waranty);
+        card_offer=findViewById(com.aryanonline.R.id.card_offer);
+        add_to_cart=findViewById(com.aryanonline.R.id.add_to_cart);
+        prod_img=findViewById(com.aryanonline.R.id.prod_img);
+        tv_prod_price=findViewById(com.aryanonline.R.id.tv_prod_price);
+        tv_prod_desc=findViewById(com.aryanonline.R.id.tv_prod_desc);
 
         product_model=(Product_model)getIntent().getSerializableExtra("Product_Model");
 
@@ -76,7 +74,7 @@ public class ShowProdDetail extends AppCompatActivity {
         Glide.with(ShowProdDetail.this)
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_image"))
                 .centerCrop()
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

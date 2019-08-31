@@ -14,21 +14,18 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Product_model;
 import com.aryanonline.ShowProdDetail;
+import com.aryanonline.util.DatabaseHandler;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Product_model;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.DatabaseHandler;
 
 
 public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyViewHolder>
@@ -46,16 +43,16 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         public MyViewHolder(View view) {
             super(view);
-            tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
-            tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
-            tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
-            tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
-            tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
-            iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
-            iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
-            iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
-            iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
-            mrpPrice = (TextView) view.findViewById(R.id.mrpPrice);
+            tv_title = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_title);
+            tv_price = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_price);
+            tv_total = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_total);
+            tv_contetiy = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_contetiy);
+            tv_add = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_add);
+            iv_logo = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_img);
+            iv_plus = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_plus);
+            iv_minus = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_minus);
+            iv_remove = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_remove);
+            mrpPrice = (TextView) view.findViewById(com.aryanonline.R.id.mrpPrice);
 
             iv_remove.setVisibility(View.GONE);
 
@@ -64,7 +61,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             tv_add.setOnClickListener(this);
             iv_logo.setOnClickListener(this);
 
-            CardView cardView = (CardView) view.findViewById(R.id.card_view);
+            CardView cardView = (CardView) view.findViewById(com.aryanonline.R.id.card_view);
             cardView.setOnClickListener(this);
 
         }
@@ -74,14 +71,14 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             int id = view.getId();
             int position = getAdapterPosition();
 
-            if (id == R.id.iv_subcat_plus) {
+            if (id == com.aryanonline.R.id.iv_subcat_plus) {
 
                 int qty = Integer.valueOf(tv_contetiy.getText().toString());
                 qty = qty + 1;
 
                 tv_contetiy.setText(String.valueOf(qty));
 
-            } else if (id == R.id.iv_subcat_minus) {
+            } else if (id == com.aryanonline.R.id.iv_subcat_minus) {
 
                 int qty = 0;
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
@@ -92,7 +89,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                     tv_contetiy.setText(String.valueOf(qty));
                 }
 
-            } else if (id == R.id.tv_subcat_add) {
+            } else if (id == com.aryanonline.R.id.tv_subcat_add) {
 
                 HashMap<String, String> map = new HashMap<>();
 
@@ -113,14 +110,14 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
                     if (dbcart.isInCart(map.get("product_id"))) {
                     //    dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
                     } else {
                       //  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
                     }
                 } else {
                     dbcart.removeItemFromCart(map.get("product_id"));
-                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+                    tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_add));
                 }
 
                 Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
@@ -130,7 +127,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
           //      mrpPrice.setText(map.get("Mrp"));
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
-            } else if (id == R.id.iv_subcat_img) {
+            } else if (id == com.aryanonline.R.id.iv_subcat_img) {
                 //showImage(modelList.get(position).getProduct_image());
 
                 Intent  intent = new Intent(context, ShowProdDetail.class);
@@ -150,7 +147,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
                 context.startActivity(intent);
                // Toast.makeText(context, "pp"+prodId, Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.card_view) {
+            } else if (id == com.aryanonline.R.id.card_view) {
 
                 Intent  intent = new Intent(context, ShowProdDetail.class);
                 intent.putExtra("Product_Model",product_model);
@@ -187,7 +184,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     @Override
     public Product_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_product_rv, parent, false);
+                .inflate(com.aryanonline.R.layout.row_product_rv, parent, false);
 
         context = parent.getContext();
 
@@ -201,7 +198,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
                 .centerCrop()
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
@@ -209,14 +206,14 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         holder.tv_title.setText(mList.getProduct_name());
         holder.mrpPrice.setText(mList.getMrp());
-        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
-                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
+        holder.tv_price.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_price) + mList.getUnit_value() + " " +
+                mList.getUnit() + " " + context.getResources().getString(com.aryanonline.R.string.currency) + " " + mList.getPrice());
 
         if (dbcart.isInCart(mList.getProduct_id())) {
-            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+            holder.tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
             holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProduct_id()));
         } else {
-            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+            holder.tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_add));
         }
 
         Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
@@ -276,17 +273,17 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.product_image_dialog);
+        dialog.setContentView(com.aryanonline.R.layout.product_image_dialog);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.show();
 
-        ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
-        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_dialog_img);
+        ImageView iv_image_cancle = (ImageView) dialog.findViewById(com.aryanonline.R.id.iv_dialog_cancle);
+        ImageView iv_image = (ImageView) dialog.findViewById(com.aryanonline.R.id.iv_dialog_img);
 
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + image)
                 .centerCrop()
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .into(iv_image);
 
@@ -303,17 +300,17 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_product_detail);
+        dialog.setContentView(com.aryanonline.R.layout.dialog_product_detail);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.show();
 
-        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_product_detail_img);
-        ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
-        ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
-        TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
-        TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
-        final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
-        final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
+        ImageView iv_image = (ImageView) dialog.findViewById(com.aryanonline.R.id.iv_product_detail_img);
+        ImageView iv_minus = (ImageView) dialog.findViewById(com.aryanonline.R.id.iv_subcat_minus);
+        ImageView iv_plus = (ImageView) dialog.findViewById(com.aryanonline.R.id.iv_subcat_plus);
+        TextView tv_title = (TextView) dialog.findViewById(com.aryanonline.R.id.tv_product_detail_title);
+        TextView tv_detail = (TextView) dialog.findViewById(com.aryanonline.R.id.tv_product_detail);
+        final TextView tv_contetiy = (TextView) dialog.findViewById(com.aryanonline.R.id.tv_subcat_contetiy);
+        final TextView tv_add = (TextView) dialog.findViewById(com.aryanonline.R.id.tv_subcat_add);
 
         tv_title.setText(title);
         tv_detail.setText(detail);
@@ -323,15 +320,15 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + image)
                 .centerCrop()
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .into(iv_image);
 
         if (dbcart.isInCart(modelList.get(position).getProduct_id())) {
-            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+            tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
             tv_contetiy.setText(dbcart.getCartItemQty(modelList.get(position).getProduct_id()));
         } else {
-            tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+            tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_add));
         }
 
         tv_add.setOnClickListener(new View.OnClickListener() {
@@ -357,14 +354,14 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
                     if (dbcart.isInCart(map.get("product_id"))) {
                       //  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
                     } else {
                       //  dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                        tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_update));
                     }
                 } else {
                     dbcart.removeItemFromCart(map.get("product_id"));
-                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+                    tv_add.setText(context.getResources().getString(com.aryanonline.R.string.tv_pro_add));
                 }
 
                 Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));

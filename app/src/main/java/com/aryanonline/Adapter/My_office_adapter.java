@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.aryanonline.Model.My_Locatio_model;
 
-import com.aryanonline.R;
+import java.util.List;
 
 public class My_office_adapter extends RecyclerView.Adapter<My_office_adapter.MyViewHolder> {
 
@@ -29,7 +27,7 @@ public class My_office_adapter extends RecyclerView.Adapter<My_office_adapter.My
 
         public MyViewHolder(View view) {
             super(view);
-            tv_office_add = (TextView) view.findViewById(R.id.tv_office_add);
+            tv_office_add = (TextView) view.findViewById(com.aryanonline.R.id.tv_office_add);
 
         }
     }
@@ -41,7 +39,7 @@ public class My_office_adapter extends RecyclerView.Adapter<My_office_adapter.My
     @Override
     public My_office_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_location, parent, false);
+                .inflate(com.aryanonline.R.layout.row_location, parent, false);
 
         context = parent.getContext();
 

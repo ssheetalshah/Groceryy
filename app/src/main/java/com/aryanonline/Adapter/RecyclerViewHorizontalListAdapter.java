@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import com.aryanonline.Model.Grocery;
-import com.aryanonline.R;
+
+import java.util.List;
 
 public class RecyclerViewHorizontalListAdapter extends RecyclerView.Adapter<RecyclerViewHorizontalListAdapter.GroceryViewHolder>{
     private List<Grocery> horizontalGrocderyList;
@@ -26,7 +25,7 @@ public class RecyclerViewHorizontalListAdapter extends RecyclerView.Adapter<Recy
     @Override
     public GroceryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflate the layout file
-        View groceryProductView = LayoutInflater.from(parent.getContext()).inflate(R.layout.demoview, parent, false);
+        View groceryProductView = LayoutInflater.from(parent.getContext()).inflate(com.aryanonline.R.layout.demoview, parent, false);
         GroceryViewHolder gvh = new GroceryViewHolder(groceryProductView);
         return gvh;
     }
@@ -54,8 +53,8 @@ public class RecyclerViewHorizontalListAdapter extends RecyclerView.Adapter<Recy
         TextView idProductName1;
         public GroceryViewHolder(View view) {
             super(view);
-            Image1=view.findViewById(R.id.Image1);
-            idProductName1=view.findViewById(R.id.idProductName1);
+            Image1=view.findViewById(com.aryanonline.R.id.Image1);
+            idProductName1=view.findViewById(com.aryanonline.R.id.idProductName1);
         }
     }
 }

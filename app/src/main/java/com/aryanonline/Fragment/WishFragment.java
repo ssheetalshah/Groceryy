@@ -1,30 +1,20 @@
 package com.aryanonline.Fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aryanonline.Adapter.WishAdapter;
-import com.aryanonline.MainActivity;
 import com.aryanonline.Model.WishModel;
-import com.aryanonline.R;
 import com.aryanonline.util.AppPreference;
 import com.aryanonline.util.ConnectivityReceiver;
 import com.aryanonline.util.HttpHandler;
@@ -33,18 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.net.ssl.HttpsURLConnection;
 
 
 public class WishFragment extends Fragment {
@@ -65,9 +44,9 @@ public class WishFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_wish, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_wish, container, false);
 
-        wishList_re = (RecyclerView) view.findViewById(R.id.wishList_re);
+        wishList_re = (RecyclerView) view.findViewById(com.aryanonline.R.id.wishList_re);
         wish_list = new ArrayList<>();
 
         if (ConnectivityReceiver.isConnected()) {

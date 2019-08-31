@@ -2,14 +2,14 @@ package com.aryanonline;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class CustomDialogClass extends Dialog implements
-        android.view.View.OnClickListener {
+        View.OnClickListener {
 
     public Activity context;
 
@@ -26,13 +26,13 @@ public class CustomDialogClass extends Dialog implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_dialog_class);
+        setContentView(com.aryanonline.R.layout.activity_custom_dialog_class);
 
-        et_add_adres_name = (EditText)findViewById(R.id.et_add_adres_name);
-        et_add_adres_phone = (EditText)findViewById(R.id.et_add_adres_phone);
-        et_add_adres_pin = (EditText)findViewById(R.id.et_add_adres_pin);
-        et_add_adres_home = (EditText)findViewById(R.id.et_add_adres_home);
-        btn_add_adres_edit = (Button)findViewById(R.id.btn_add_adres_edit);
+        et_add_adres_name = (EditText)findViewById(com.aryanonline.R.id.et_add_adres_name);
+        et_add_adres_phone = (EditText)findViewById(com.aryanonline.R.id.et_add_adres_phone);
+        et_add_adres_pin = (EditText)findViewById(com.aryanonline.R.id.et_add_adres_pin);
+        et_add_adres_home = (EditText)findViewById(com.aryanonline.R.id.et_add_adres_home);
+        btn_add_adres_edit = (Button)findViewById(com.aryanonline.R.id.btn_add_adres_edit);
 
     }
 
@@ -40,7 +40,7 @@ public class CustomDialogClass extends Dialog implements
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.btn_add_adres_edit :
+            case com.aryanonline.R.id.btn_add_adres_edit :
 
                 getName = et_add_adres_name.getText().toString();
                 getPhone = et_add_adres_phone.getText().toString();

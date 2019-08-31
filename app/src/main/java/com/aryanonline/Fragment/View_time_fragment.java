@@ -16,6 +16,16 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Adapter.Home_adapter;
+import com.aryanonline.Adapter.View_time_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Category_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
+import com.aryanonline.util.RecyclerTouchListener;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,18 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.aryanonline.Adapter.Home_adapter;
-import com.aryanonline.Adapter.View_time_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Category_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.RecyclerTouchListener;
-import com.aryanonline.util.Session_management;
 
 
 public class View_time_fragment extends Fragment {
@@ -65,13 +63,13 @@ public class View_time_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_time_list, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_time_list, container, false);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.delivery_time));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.delivery_time));
 
         sessionManagement = new Session_management(getActivity());
 
-        rv_time = (RecyclerView) view.findViewById(R.id.rv_times);
+        rv_time = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_times);
         rv_time.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         getdate = getArguments().getString("date");
@@ -147,7 +145,7 @@ public class View_time_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

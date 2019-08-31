@@ -25,6 +25,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.JSONParser;
+import com.aryanonline.util.NameValuePair;
+import com.aryanonline.util.Session_management;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
@@ -34,14 +40,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.JSONParser;
-import com.aryanonline.util.NameValuePair;
-import com.aryanonline.util.Session_management;
 
 
 public class Edit_profile_fragment extends Fragment implements View.OnClickListener {
@@ -75,24 +73,24 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_edit_profile, container, false);
         setHasOptionsMenu(true);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.edit_profile));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.edit_profile));
 
         sessionManagement = new Session_management(getActivity());
 
-        et_phone = (EditText) view.findViewById(R.id.et_pro_phone);
-        et_name = (EditText) view.findViewById(R.id.et_pro_name);
-        tv_phone = (TextView) view.findViewById(R.id.tv_pro_phone);
-        tv_name = (TextView) view.findViewById(R.id.tv_pro_name);
-        tv_email = (TextView) view.findViewById(R.id.tv_pro_email);
-        et_email = (EditText) view.findViewById(R.id.et_pro_email);
-        iv_profile = (ImageView) view.findViewById(R.id.iv_pro_img);
+        et_phone = (EditText) view.findViewById(com.aryanonline.R.id.et_pro_phone);
+        et_name = (EditText) view.findViewById(com.aryanonline.R.id.et_pro_name);
+        tv_phone = (TextView) view.findViewById(com.aryanonline.R.id.tv_pro_phone);
+        tv_name = (TextView) view.findViewById(com.aryanonline.R.id.tv_pro_name);
+        tv_email = (TextView) view.findViewById(com.aryanonline.R.id.tv_pro_email);
+        et_email = (EditText) view.findViewById(com.aryanonline.R.id.et_pro_email);
+        iv_profile = (ImageView) view.findViewById(com.aryanonline.R.id.iv_pro_img);
         /*et_house = (EditText) view.findViewById(R.id.et_pro_home);
         tv_house = (TextView) view.findViewById(R.id.tv_pro_home);
         tv_socity = (TextView) view.findViewById(R.id.tv_pro_socity);*/
-        btn_update = (Button) view.findViewById(R.id.btn_pro_edit);
+        btn_update = (Button) view.findViewById(com.aryanonline.R.id.btn_pro_edit);
         //btn_socity = (TextView) view.findViewById(R.id.btn_pro_socity);
 
         String getemail = sessionManagement.getUserDetails().get(BaseURL.KEY_EMAIL);
@@ -116,7 +114,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
             Glide.with(this)
                     .load(BaseURL.IMG_PROFILE_URL + getimage)
                     .centerCrop()
-                    .placeholder(R.drawable.aplogo)
+                    .placeholder(com.aryanonline.R.drawable.aplogo)
                     .crossFade()
                     .into(iv_profile);
         }
@@ -140,7 +138,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.btn_pro_edit) {
+        if (id == com.aryanonline.R.id.btn_pro_edit) {
             attemptEditProfile();
         } /*else if (id == R.id.btn_pro_socity) {
 
@@ -159,8 +157,8 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_enter_pincode), Toast.LENGTH_SHORT).show();
             }
 
-        } */else if (id == R.id.iv_pro_img) {
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        } */else if (id == com.aryanonline.R.id.iv_pro_img) {
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             // Start the Intent
             startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE1);
         }
@@ -168,15 +166,15 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
     private void attemptEditProfile() {
 
-        tv_phone.setText(getResources().getString(R.string.et_login_phone_hint));
-        tv_email.setText(getResources().getString(R.string.tv_login_email));
-        tv_name.setText(getResources().getString(R.string.tv_reg_name_hint));
+        tv_phone.setText(getResources().getString(com.aryanonline.R.string.et_login_phone_hint));
+        tv_email.setText(getResources().getString(com.aryanonline.R.string.tv_login_email));
+        tv_name.setText(getResources().getString(com.aryanonline.R.string.tv_reg_name_hint));
         /*tv_house.setText(getResources().getString(R.string.tv_reg_house));
         tv_socity.setText(getResources().getString(R.string.tv_reg_socity));*/
 
-        tv_name.setTextColor(getResources().getColor(R.color.color_3));
-        tv_phone.setTextColor(getResources().getColor(R.color.color_3));
-        tv_email.setTextColor(getResources().getColor(R.color.color_3));
+        tv_name.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_phone.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
         /*tv_house.setTextColor(getResources().getColor(R.color.dark_gray));
         tv_socity.setTextColor(getResources().getColor(R.color.dark_gray));*/
 
@@ -190,24 +188,24 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         View focusView = null;
 
         if (TextUtils.isEmpty(getphone)) {
-            tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_phone.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_phone;
             cancel = true;
         } else if (!isPhoneValid(getphone)) {
-            tv_phone.setText(getResources().getString(R.string.phone_too_short));
-            tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_phone.setText(getResources().getString(com.aryanonline.R.string.phone_too_short));
+            tv_phone.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_phone;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getname)) {
-            tv_name.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_name.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_name;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getemail)) {
-            tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_email.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
         }
@@ -333,7 +331,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.uploading_profile_data), true);
+            progressDialog = ProgressDialog.show(getActivity(), "", getResources().getString(com.aryanonline.R.string.uploading_profile_data), true);
             jsonParser = new JSONParser(getActivity());
         }
 
@@ -392,7 +390,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
                 ((MainActivity) getActivity()).updateHeader();
 
-                Toast.makeText(getActivity(), getResources().getString(R.string.profile_updated), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.profile_updated), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "" + error_string, Toast.LENGTH_SHORT).show();
             }
@@ -416,11 +414,11 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
 
-        MenuItem cart = menu.findItem(R.id.action_cart);
+        MenuItem cart = menu.findItem(com.aryanonline.R.id.action_cart);
         cart.setVisible(false);
-        MenuItem change_pass = menu.findItem(R.id.action_change_password);
+        MenuItem change_pass = menu.findItem(com.aryanonline.R.id.action_change_password);
         change_pass.setVisible(true);
-        MenuItem search = menu.findItem(R.id.action_search);
+        MenuItem search = menu.findItem(com.aryanonline.R.id.action_search);
         search.setVisible(false);
 
     }
@@ -429,10 +427,10 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.action_change_password:
+            case com.aryanonline.R.id.action_change_password:
                 Fragment fm = new Change_password_fragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
                 return false;
         }

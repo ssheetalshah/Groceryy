@@ -8,15 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.Model.Category_model;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Category_model;
-import com.aryanonline.R;
-
 
 
 public class Home_adapter extends RecyclerView.Adapter<Home_adapter.MyViewHolder> {
@@ -30,8 +27,8 @@ public class Home_adapter extends RecyclerView.Adapter<Home_adapter.MyViewHolder
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.tv_home_title);
-            image = (ImageView) view.findViewById(R.id.iv_home_img);
+            title = (TextView) view.findViewById(com.aryanonline.R.id.tv_home_title);
+            image = (ImageView) view.findViewById(com.aryanonline.R.id.iv_home_img);
         }
     }
 
@@ -42,7 +39,7 @@ public class Home_adapter extends RecyclerView.Adapter<Home_adapter.MyViewHolder
     @Override
     public Home_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_home_rv, parent, false);
+                .inflate(com.aryanonline.R.layout.row_home_rv, parent, false);
 
         context = parent.getContext();
 
@@ -55,7 +52,7 @@ public class Home_adapter extends RecyclerView.Adapter<Home_adapter.MyViewHolder
 
         Glide.with(context)
                 .load(BaseURL.IMG_CATEGORY_URL+mList.getImage())
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

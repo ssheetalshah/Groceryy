@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aryanonline.Model.Data;
+
 import java.util.Collections;
 import java.util.List;
-
-import com.aryanonline.Model.Data;
-import com.aryanonline.R;
 
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
 
@@ -34,8 +33,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
         TextView idProductName1;
         public MyViewHolder(View view) {
             super(view);
-            Image1=(ImageView) view.findViewById(R.id.Image1);
-            idProductName1=(TextView) view.findViewById(R.id.idProductName1);
+            Image1=(ImageView) view.findViewById(com.aryanonline.R.id.Image1);
+            idProductName1=(TextView) view.findViewById(com.aryanonline.R.id.idProductName1);
         }
     }
 
@@ -43,7 +42,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.demoview, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(com.aryanonline.R.layout.demoview, parent, false);
 
         return new MyViewHolder(itemView);
     }

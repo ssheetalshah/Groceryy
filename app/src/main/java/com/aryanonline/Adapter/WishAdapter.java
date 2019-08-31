@@ -9,8 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aryanonline.Model.WishModel;
-import com.aryanonline.R;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -37,11 +35,11 @@ public class WishAdapter extends RecyclerView.Adapter<WishAdapter.ViewHolder> {
 
         public ViewHolder(View view) {
             super(view);
-            pdName = (TextView) view.findViewById(R.id.pdName);
-            pdModel = (TextView) view.findViewById(R.id.pdModel);
-            pdStock = (TextView) view.findViewById(R.id.pdStock);
-            pdPrice = (TextView) view.findViewById(R.id.pdPrice);
-            imageView = (CircleImageView) view.findViewById(R.id.imageView);
+            pdName = (TextView) view.findViewById(com.aryanonline.R.id.pdName);
+            pdModel = (TextView) view.findViewById(com.aryanonline.R.id.pdModel);
+            pdStock = (TextView) view.findViewById(com.aryanonline.R.id.pdStock);
+            pdPrice = (TextView) view.findViewById(com.aryanonline.R.id.pdPrice);
+            imageView = (CircleImageView) view.findViewById(com.aryanonline.R.id.imageView);
         }
     }
 
@@ -56,7 +54,7 @@ public class WishAdapter extends RecyclerView.Adapter<WishAdapter.ViewHolder> {
     @Override
     public WishAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.wish_row, parent, false);
+                .inflate(com.aryanonline.R.layout.wish_row, parent, false);
 
         return new WishAdapter.ViewHolder(itemView);
     }

@@ -3,7 +3,6 @@ package com.aryanonline;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,44 +18,43 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
-import android.telephony.SmsManager;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aryanonline.Fragment.MoreFragment;
-import com.aryanonline.Fragment.WishFragment;
-import com.bumptech.glide.Glide;
-
-
 import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Fragment.Home_fragment;
 import com.aryanonline.Fragment.Cart_fragment;
-import com.aryanonline.Fragment.Support_info_fragment;
 import com.aryanonline.Fragment.Edit_profile_fragment;
-import com.aryanonline.Fragment.My_order_fragment;
+import com.aryanonline.Fragment.Home_fragment;
 import com.aryanonline.Fragment.LocationFragment;
-
+import com.aryanonline.Fragment.MoreFragment;
+import com.aryanonline.Fragment.My_order_fragment;
+import com.aryanonline.Fragment.Support_info_fragment;
+import com.aryanonline.Fragment.WishFragment;
 import com.aryanonline.util.ConnectivityReceiver;
 import com.aryanonline.util.DatabaseHandler;
 import com.aryanonline.util.Session_management;
+import com.bumptech.glide.Glide;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -87,24 +85,26 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        rll = (RelativeLayout) findViewById(R.id.rll);
-        fab1 = (FloatingActionButton) findViewById(R.id.fab1);
-        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        setContentView(com.aryanonline.R.layout.activity_main);
+        rll = (RelativeLayout) findViewById(com.aryanonline.R.id.rll);
+        fab1 = (FloatingActionButton) findViewById(com.aryanonline.R.id.fab1);
+        fab2 = (FloatingActionButton) findViewById(com.aryanonline.R.id.fab2);
 
-        navView = findViewById(R.id.bottom_nav_view);
+//        attachBaseContext(MainActivity.this);
+
+        navView = findViewById(com.aryanonline.R.id.bottom_nav_view);
         // mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation_contact = navView.findViewById(R.id.navigation_contact);
-        navigation_contact1 = navView.findViewById(R.id.navigation_contact1);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        navigation_contact = navView.findViewById(com.aryanonline.R.id.navigation_contact);
+        navigation_contact1 = navView.findViewById(com.aryanonline.R.id.navigation_contact1);
+        Toolbar toolbar = (Toolbar) findViewById(com.aryanonline.R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        getSupportActionBar().setTitle(getResources().getString(com.aryanonline.R.string.app_name));
 
 
-        toolbar.setTitleTextColor(getResources().getColor(R.color.darkgrey));
+        toolbar.setTitleTextColor(getResources().getColor(com.aryanonline.R.color.darkgrey));
 
-        rll = (RelativeLayout) findViewById(R.id.rll);
+        rll = (RelativeLayout) findViewById(com.aryanonline.R.id.rll);
 
     /*    ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name, R.string.app_name);
         mDrawerToggle.getDrawerArrowDrawable().setColor(Color.RED);
@@ -118,13 +118,13 @@ public class MainActivity extends AppCompatActivity
 
         sessionManagement = new Session_management(MainActivity.this);
 
-        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        Drawable myDrawable = MainActivity.this.getResources().getDrawable(R.drawable.menuiii);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(com.aryanonline.R.id.drawer_layout);
+        Drawable myDrawable = MainActivity.this.getResources().getDrawable(com.aryanonline.R.drawable.menuiii);
         myDrawable.setColorFilter(new
                 PorterDuffColorFilter(0xffff00, PorterDuff.Mode.MULTIPLY));
 
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, com.aryanonline.R.string.navigation_drawer_open, com.aryanonline.R.string.navigation_drawer_close);
 
 //        toggle.setHomeAsUpIndicator(R.drawable.indicator_corner_bg);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
         // toggle.setHomeAsUpIndicator(R.drawable.arrow_yellow);
-        toggle.setHomeAsUpIndicator(R.drawable.hamburg);
+        toggle.setHomeAsUpIndicator(com.aryanonline.R.drawable.hamburg);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(com.aryanonline.R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -158,11 +158,11 @@ public class MainActivity extends AppCompatActivity
 //        mDrawerToggle.setDrawerIndicatorEnabled(false);
         nav_menu = navigationView.getMenu();
 
-        View header = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
+        View header = ((NavigationView) findViewById(com.aryanonline.R.id.nav_view)).getHeaderView(0);
 
-        iv_profile = (ImageView) header.findViewById(R.id.iv_header_img);
-        tv_name = (TextView) header.findViewById(R.id.tv_header_name);
-        tv_number = (TextView) header.findViewById(R.id.tv_header_moblie);
+        iv_profile = (ImageView) header.findViewById(com.aryanonline.R.id.iv_header_img);
+        tv_name = (TextView) header.findViewById(com.aryanonline.R.id.tv_header_name);
+        tv_number = (TextView) header.findViewById(com.aryanonline.R.id.tv_header_moblie);
 
         iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity
                 if (sessionManagement.isLoggedIn()) {
                     Fragment fm = new Edit_profile_fragment();
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                    fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
                 } else {
                     Intent i = new Intent(MainActivity.this, LoginActivity.class);
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fm = new Home_fragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.contentPanel, fm, "Home_fragment")
+                    .replace(com.aryanonline.R.id.contentPanel, fm, "Home_fragment")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
         }
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity
                             getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-                    Fragment fr = getFragmentManager().findFragmentById(R.id.contentPanel);
+                    Fragment fr = getFragmentManager().findFragmentById(com.aryanonline.R.id.contentPanel);
 
                     final String fm_name = fr.getClass().getSimpleName();
                     Log.e("backstack: ", ": " + fm_name);
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity
                             public void onClick(View view) {
                                 Fragment fm = new Home_fragment();
                                 FragmentManager fragmentManager = getFragmentManager();
-                                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                                         .addToBackStack(null).commit();
                             }
                         });
@@ -277,6 +277,19 @@ public class MainActivity extends AppCompatActivity
             /*MyFirebaseRegister fireReg = new MyFirebaseRegister(this);
             fireReg.RegisterUser(sessionManagement.getUserDetails().get(BaseURL.KEY_ID));*/
         }
+
+       CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+               .setDefaultFontPath("font/Roboto-Regular.ttf")
+               .setFontAttrId(R.attr.fontPath)
+               .build()
+       );
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        Log.e("Attach Base Context","----------");
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -285,10 +298,10 @@ public class MainActivity extends AppCompatActivity
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case com.aryanonline.R.id.navigation_home:
                     //   mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_contact:
+                case com.aryanonline.R.id.navigation_contact:
                     if (toggel % 2 != 0) {
                         rll.setVisibility(View.GONE);
                         toggel++;
@@ -296,17 +309,17 @@ public class MainActivity extends AppCompatActivity
                         rll.setVisibility(View.VISIBLE);
                         toggel++;
                     } return true;
-                case R.id.navigation_contact1:
+                case com.aryanonline.R.id.navigation_contact1:
                     rll.setVisibility(View.GONE);
                     navigation_contact.setVisibility(View.VISIBLE);
                     return true;
-                case R.id.navigation_notifications:
+                case com.aryanonline.R.id.navigation_notifications:
                     //   mTextMessage.setText(R.string.title_notifications);
                     return true;
-                case R.id.navigation_more:
+                case com.aryanonline.R.id.navigation_more:
                     Fragment fm = new MoreFragment();
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                    fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
                     return true;
 
@@ -323,7 +336,7 @@ public class MainActivity extends AppCompatActivity
 
             Glide.with(this)
                     .load(BaseURL.IMG_PROFILE_URL + getimage)
-                    .placeholder(R.drawable.aplogo)
+                    .placeholder(com.aryanonline.R.drawable.aplogo)
                     .crossFade()
                     .into(iv_profile);
             tv_name.setText(getname);
@@ -335,11 +348,11 @@ public class MainActivity extends AppCompatActivity
 
         if (sessionManagement.isLoggedIn()) {
             tv_number.setVisibility(View.VISIBLE);
-            nav_menu.findItem(R.id.nav_logout).setVisible(true);
-            nav_menu.findItem(R.id.nav_user).setVisible(true);
+            nav_menu.findItem(com.aryanonline.R.id.nav_logout).setVisible(true);
+            nav_menu.findItem(com.aryanonline.R.id.nav_user).setVisible(true);
         } else {
             tv_number.setVisibility(View.GONE);
-            tv_name.setText(getResources().getString(R.string.btn_login));
+            tv_name.setText(getResources().getString(com.aryanonline.R.string.btn_login));
             tv_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -347,8 +360,8 @@ public class MainActivity extends AppCompatActivity
                     startActivity(i);
                 }
             });
-            nav_menu.findItem(R.id.nav_logout).setVisible(false);
-            nav_menu.findItem(R.id.nav_user).setVisible(false);
+            nav_menu.findItem(com.aryanonline.R.id.nav_logout).setVisible(false);
+            nav_menu.findItem(com.aryanonline.R.id.nav_user).setVisible(false);
         }
     }
 
@@ -366,7 +379,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(com.aryanonline.R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -377,11 +390,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(com.aryanonline.R.menu.main, menu);
 
-        final MenuItem item = menu.findItem(R.id.action_cart);
-        MenuItem c_password = menu.findItem(R.id.action_change_password);
-        MenuItem search = menu.findItem(R.id.action_search);
+        final MenuItem item = menu.findItem(com.aryanonline.R.id.action_cart);
+        MenuItem c_password = menu.findItem(com.aryanonline.R.id.action_change_password);
+        MenuItem search = menu.findItem(com.aryanonline.R.id.action_search);
 
         item.setVisible(true);
         c_password.setVisible(false);
@@ -396,7 +409,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        totalBudgetCount = (TextView) count.findViewById(R.id.actionbar_notifcation_textview);
+        totalBudgetCount = (TextView) count.findViewById(com.aryanonline.R.id.actionbar_notifcation_textview);
 
         totalBudgetCount.setText("" + dbcart.getCartCount());
 
@@ -410,12 +423,12 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_cart) {
+        if (id == com.aryanonline.R.id.action_cart) {
 
             if (dbcart.getCartCount() > 0) {
                 Fragment fm = new Cart_fragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
             } else {
                 Toast.makeText(MainActivity.this, "No item in cart", Toast.LENGTH_SHORT).show();
@@ -435,60 +448,60 @@ public class MainActivity extends AppCompatActivity
         Fragment fm = null;
         Bundle args = new Bundle();
 
-        if (id == R.id.nav_home) {
+        if (id == com.aryanonline.R.id.nav_home) {
             Fragment fm_home = new Home_fragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.contentPanel, fm_home, "Home_fragment")
+                    .replace(com.aryanonline.R.id.contentPanel, fm_home, "Home_fragment")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
-        } else if (id == R.id.nav_offer) {
+        } else if (id == com.aryanonline.R.id.nav_offer) {
 
-        } else if (id == R.id.nav_office) {
+        } else if (id == com.aryanonline.R.id.nav_office) {
             fm = new LocationFragment();
-        } else if (id == R.id.nav_myorders) {
+        } else if (id == com.aryanonline.R.id.nav_myorders) {
 
             fm = new My_order_fragment();
-        } else if (id == R.id.nav_myprofile) {
+        } else if (id == com.aryanonline.R.id.nav_myprofile) {
             fm = new Edit_profile_fragment();
-        } else if (id == R.id.nav_support) {
+        } else if (id == com.aryanonline.R.id.nav_support) {
 
             fm = new Support_info_fragment();
             args.putString("url", BaseURL.GET_SUPPORT_URL);
-            args.putString("title", getResources().getString(R.string.nav_support));
+            args.putString("title", getResources().getString(com.aryanonline.R.string.nav_support));
             fm.setArguments(args);
-        } else if (id == R.id.nav_aboutus) {
+        } else if (id == com.aryanonline.R.id.nav_aboutus) {
 
             fm = new Support_info_fragment();
             args.putString("url", BaseURL.GET_ABOUT_URL);
-            args.putString("title", getResources().getString(R.string.nav_about));
+            args.putString("title", getResources().getString(com.aryanonline.R.string.nav_about));
             fm.setArguments(args);
-        } else if (id == R.id.nav_policy) {
+        } else if (id == com.aryanonline.R.id.nav_policy) {
 
             fm = new Support_info_fragment();
             args.putString("url", BaseURL.GET_TERMS_URL);
-            args.putString("title", getResources().getString(R.string.nav_terms));
+            args.putString("title", getResources().getString(com.aryanonline.R.string.nav_terms));
             fm.setArguments(args);
-        } else if (id == R.id.nav_review) {
+        } else if (id == com.aryanonline.R.id.nav_review) {
             reviewOnApp();
-        } else if (id == R.id.nav_share) {
+        } else if (id == com.aryanonline.R.id.nav_share) {
             shareApp();
-        } else if (id == R.id.nav_wishlist) {
+        } else if (id == com.aryanonline.R.id.nav_wishlist) {
             fm = new WishFragment();
           /*  Intent intent = new Intent(MainActivity.this, WishlistActivity.class);
             startActivity(intent);*/
-        } else if (id == R.id.nav_logout) {
+        } else if (id == com.aryanonline.R.id.nav_logout) {
             sessionManagement.logoutSession();
             finish();
         }
 
         if (fm != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+            fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(com.aryanonline.R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -560,11 +573,11 @@ public class MainActivity extends AppCompatActivity
         int color;
 
         if (!isConnected) {
-            message = "" + getResources().getString(R.string.no_internet);
+            message = "" + getResources().getString(com.aryanonline.R.string.no_internet);
             color = Color.RED;
 
             Snackbar snackbar = Snackbar
-                    .make(findViewById(R.id.coordinatorlayout), message, Snackbar.LENGTH_LONG);
+                    .make(findViewById(com.aryanonline.R.id.coordinatorlayout), message, Snackbar.LENGTH_LONG);
                 /*.setAction("Retry", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -573,7 +586,7 @@ public class MainActivity extends AppCompatActivity
                 })*/
 
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            TextView textView = (TextView) sbView.findViewById(com.aryanonline.R.id.snackbar_text);
             textView.setTextColor(color);
             snackbar.show();
         }

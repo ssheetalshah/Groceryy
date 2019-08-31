@@ -8,18 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.util.DatabaseHandler;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.R;
-import com.aryanonline.util.DatabaseHandler;
-
 
 
 public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolder> {
@@ -61,7 +57,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
     public ProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
 
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_rv, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(com.aryanonline.R.layout.row_product_rv, parent, false);
 
         return new ProductHolder(view);
     }
@@ -78,15 +74,15 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         Glide.with(activity)
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_image"))
                 .centerCrop()
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(holder.iv_logo);
 
         holder.tv_title.setText(map.get("product_name"));
-        holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) + map.get("unit_value") + " " +
-                map.get("unit") +" "+activity.getResources().getString(R.string.currency)+" "+ map.get("price"));
+        holder.tv_price.setText(activity.getResources().getString(com.aryanonline.R.string.tv_pro_price) + map.get("unit_value") + " " +
+                map.get("unit") +" "+activity.getResources().getString(com.aryanonline.R.string.currency)+" "+ map.get("price"));
         holder.tv_contetiy.setText(map.get("qty"));
 
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
@@ -168,17 +164,17 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         public ProductHolder(View view) {
             super(view);
 
-            tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
-            tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
-            tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
-            tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
-            tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
-            iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
-            iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
-            iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
-            iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
+            tv_title = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_title);
+            tv_price = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_price);
+            tv_total = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_total);
+            tv_contetiy = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_contetiy);
+            tv_add = (TextView) view.findViewById(com.aryanonline.R.id.tv_subcat_add);
+            iv_logo = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_img);
+            iv_plus = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_plus);
+            iv_minus = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_minus);
+            iv_remove = (ImageView) view.findViewById(com.aryanonline.R.id.iv_subcat_remove);
 
-            tv_add.setText(R.string.tv_pro_update);
+            tv_add.setText(com.aryanonline.R.string.tv_pro_update);
 
         }
     }

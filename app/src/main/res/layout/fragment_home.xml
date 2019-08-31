@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -519,6 +520,7 @@
                                 android:layout_gravity="left"
                                 android:layout_margin="10dp"
                                 android:gravity="center"
+                                style="@style/FontView"
                                 android:text="RECOMMENDED PRODUCTS"
                                 android:textColor="#000"
                                 android:textSize="14dp" />
@@ -539,7 +541,9 @@
                                 android:layout_height="1dp"
                                 android:background="#7C7C7C"
                                 android:gravity="center"
-                                android:orientation="horizontal"></LinearLayout>
+                                android:orientation="horizontal">
+
+                            </LinearLayout>
 
                             <TextView
                                 android:id="@+id/bt_view"
@@ -548,6 +552,7 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:padding="8dp"
+                                style="@style/FontView"
                                 android:text="View All"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="15dp"
@@ -570,9 +575,9 @@
                             android:weightSum="1">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.60"
+                                android:layout_weight="0.50"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -584,9 +589,9 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.40"
+                                android:layout_weight="0.50"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -606,7 +611,9 @@
                                     android:layout_marginBottom="5dp"
                                     android:background="#7C7C7C"
                                     android:gravity="center"
-                                    android:orientation="horizontal"></LinearLayout>
+                                    android:orientation="horizontal">
+
+                                </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -627,6 +634,210 @@
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:cardCornerRadius="3dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="350dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.50"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ggms" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.50"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:text="Gems Stones"
+                                    android:textColor="#000" />
+
+                                <LinearLayout
+                                    android:layout_width="80dp"
+                                    android:layout_height="1dp"
+                                    android:layout_gravity="center"
+                                    android:elevation="4dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="#7C7C7C"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/cate2List"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                    </android.support.v7.widget.RecyclerView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginRight="2dp"
+                            app:cardBackgroundColor="#808080"
+                            >
+
+                            <TextView
+                                android:id="@+id/tx_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:textStyle="bold"
+                                android:text="Healing Crystals"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:drawableStart="@drawable/diamond"
+                                android:drawableLeft="@color/gray"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            app:cardBackgroundColor="#808080"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginLeft="2dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/tx_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="Vastu Products"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:padding="5dp"
+                                android:gravity="center"
+                                android:drawableEnd="@drawable/diamond"
+                                android:drawableRight="@color/gray"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            app:cardBackgroundColor="#808080"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginRight="2dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/tx_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:textStyle="bold"
+                                android:text="Artificial Jewelry"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:drawableStart="@drawable/diamond"
+                                android:drawableLeft="@color/gray"
+                                android:padding="5dp"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            app:cardBackgroundColor="#808080"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginLeft="2dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/tx_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="Ruby"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:padding="5dp"
+                                android:drawableEnd="@drawable/diamond"
+                                android:drawableRight="@color/gray"
+                                android:gravity="center"
+                                />
+
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imagjewel"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/jewelimg"
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -686,6 +897,5 @@
             app:pressedTranslationZ="12dp" />
 
     </RelativeLayout>
-
 
 </android.support.constraint.ConstraintLayout>

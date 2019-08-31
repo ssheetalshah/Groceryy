@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fontPath="http://schemas.android.com/tools"
     android:id="@+id/mainButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@drawable/border"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:id="@+id/badge_layout1"
@@ -22,6 +24,7 @@
             android:gravity="center">
 
             <LinearLayout
+                android:id="@+id/lnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -32,11 +35,18 @@
                 <ImageView
                     android:id="@+id/idProductImage"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="120dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/aplogo" />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="@color/gray"
+                android:layout_below="@+id/lnr"
+                />
 
         </RelativeLayout>
 
@@ -68,7 +78,9 @@
                 android:layout_height="wrap_content"
                 android:text="Medicine Syrup"
                 android:textColor="#383737"
-                android:textSize="11dp" />
+                android:textSize="11dp"
+                android:singleLine="true"
+                />
 
             <LinearLayout
                 android:gravity="center"
@@ -88,7 +100,9 @@
                     android:layout_height="wrap_content"
                     android:text="500"
                     android:textColor="#000"
-                    android:textSize="13dp" />
+                    android:textSize="13dp"
+                    style="@style/FontView"
+                    />
 
             </LinearLayout>
 

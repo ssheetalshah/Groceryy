@@ -1,8 +1,6 @@
 package com.aryanonline.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +11,6 @@ import android.widget.TextView;
 
 import com.aryanonline.Config.BaseURL;
 import com.aryanonline.Model.CompareModel;
-import com.aryanonline.Model.TopModel;
-import com.aryanonline.NewActivity;
-import com.aryanonline.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -40,12 +35,12 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
         public ViewHolder(View view) {
             super(view);
 
-            pnme = (TextView) view.findViewById(R.id.pnme);
-            pmodel = (TextView) view.findViewById(R.id.pmodel);
-            pPrice = (TextView) view.findViewById(R.id.pPrice);
-            pDescrip = (TextView) view.findViewById(R.id.pDescrip);
-            imgComp = (ImageView) view.findViewById(R.id.imgComp);
-            mainButton = (LinearLayout) view.findViewById(R.id.mainButton);
+            pnme = (TextView) view.findViewById(com.aryanonline.R.id.pnme);
+            pmodel = (TextView) view.findViewById(com.aryanonline.R.id.pmodel);
+            pPrice = (TextView) view.findViewById(com.aryanonline.R.id.pPrice);
+            pDescrip = (TextView) view.findViewById(com.aryanonline.R.id.pDescrip);
+            imgComp = (ImageView) view.findViewById(com.aryanonline.R.id.imgComp);
+            mainButton = (LinearLayout) view.findViewById(com.aryanonline.R.id.mainButton);
             // card = (LinearLayout) view.findViewById(R.id.card_view);
         }
     }
@@ -61,7 +56,7 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
     @Override
     public CompareAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.compare_row, parent, false);
+                .inflate(com.aryanonline.R.layout.compare_row, parent, false);
 
         return new CompareAdapter.ViewHolder(itemView);
     }
@@ -78,7 +73,7 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
         // viewHolder.card.setTag(viewHolder);
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + Image)
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

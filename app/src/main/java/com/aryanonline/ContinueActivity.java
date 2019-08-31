@@ -3,8 +3,8 @@ package com.aryanonline;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -13,13 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aryanonline.util.Session_management;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.Iterator;
-
-import com.aryanonline.util.Session_management;
 
 public class ContinueActivity extends AppCompatActivity {
 
@@ -35,12 +35,12 @@ public class ContinueActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_continue);
+        setContentView(com.aryanonline.R.layout.activity_continue);
 
-        et_username = (EditText) findViewById(R.id.et_username);
-        et_mobile_no = (EditText) findViewById(R.id.et_mobile_no);
-        btnContinue = (Button) findViewById(R.id.btnContinue);
-        btnReg = (Button) findViewById(R.id.btnReg);
+        et_username = (EditText) findViewById(com.aryanonline.R.id.et_username);
+        et_mobile_no = (EditText) findViewById(com.aryanonline.R.id.et_mobile_no);
+        btnContinue = (Button) findViewById(com.aryanonline.R.id.btnContinue);
+        btnReg = (Button) findViewById(com.aryanonline.R.id.btnReg);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -47,4 +47,8 @@
         <item name="android:textColorSecondary">#4E4C4C</item>
     </style>
 
+    <style name="FontView" parent="android:Widget.TextView">
+        <item name="fontPath">font/Roboto-Regular.ttf</item>
+    </style>
+
 </resources>

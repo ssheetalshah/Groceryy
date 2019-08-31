@@ -19,6 +19,13 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Adapter.Product_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Product_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,15 +37,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.aryanonline.Adapter.Product_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Product_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
 
 
 public class Search_fragment extends Fragment {
@@ -65,13 +63,13 @@ public class Search_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_search, container, false);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.search));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.search));
 
-        et_search = (EditText) view.findViewById(R.id.et_search);
-        btn_search = (Button) view.findViewById(R.id.btn_search);
-        rv_search = (RecyclerView) view.findViewById(R.id.rv_search);
+        et_search = (EditText) view.findViewById(com.aryanonline.R.id.et_search);
+        btn_search = (Button) view.findViewById(com.aryanonline.R.id.btn_search);
+        rv_search = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_search);
         rv_search.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         btn_search.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +78,7 @@ public class Search_fragment extends Fragment {
                 String get_search_txt = et_search.getText().toString();
 
                 if(TextUtils.isEmpty(get_search_txt)){
-                    Toast.makeText(getActivity(), getResources().getString(R.string.enter_keyword), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.enter_keyword), Toast.LENGTH_SHORT).show();
                 }else{
                     if(ConnectivityReceiver.isConnected()){
                         makeGetProductRequest(get_search_txt);
@@ -129,7 +127,7 @@ public class Search_fragment extends Fragment {
 
                         if(getActivity() != null) {
                             if (product_modelList.isEmpty()) {
-                                Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -144,7 +142,7 @@ public class Search_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

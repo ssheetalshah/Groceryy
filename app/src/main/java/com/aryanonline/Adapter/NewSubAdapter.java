@@ -1,6 +1,5 @@
 package com.aryanonline.Adapter;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +16,7 @@ import android.widget.Toast;
 
 import com.aryanonline.AllCateActivity;
 import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.NewCategory;
 import com.aryanonline.Model.SubCatModel;
-import com.aryanonline.Model.TopModel;
-import com.aryanonline.NewActivity;
-import com.aryanonline.R;
 import com.aryanonline.util.AppPreference;
 import com.aryanonline.util.ConnectivityReceiver;
 import com.bumptech.glide.Glide;
@@ -63,11 +58,11 @@ public class NewSubAdapter extends RecyclerView.Adapter<NewSubAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
 
-            idProductprice = (TextView) view.findViewById(R.id.idProductprice);
-            imagSub = (ImageView) view.findViewById(R.id.imagSub);
-            wish = (ImageView) view.findViewById(R.id.wish);
-            wishred = (ImageView) view.findViewById(R.id.wishred);
-            prodd = (LinearLayout) view.findViewById(R.id.prodd);
+            idProductprice = (TextView) view.findViewById(com.aryanonline.R.id.idProductprice);
+            imagSub = (ImageView) view.findViewById(com.aryanonline.R.id.imagSub);
+            wish = (ImageView) view.findViewById(com.aryanonline.R.id.wish);
+            wishred = (ImageView) view.findViewById(com.aryanonline.R.id.wishred);
+            prodd = (LinearLayout) view.findViewById(com.aryanonline.R.id.prodd);
         }
     }
 
@@ -82,7 +77,7 @@ public class NewSubAdapter extends RecyclerView.Adapter<NewSubAdapter.ViewHolder
     @Override
     public NewSubAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.new_sub_cat, parent, false);
+                .inflate(com.aryanonline.R.layout.new_sub_cat, parent, false);
 
         return new NewSubAdapter.ViewHolder(itemView);
     }
@@ -98,7 +93,7 @@ public class NewSubAdapter extends RecyclerView.Adapter<NewSubAdapter.ViewHolder
         Image = subCatModel.getImage();
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + Image)
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

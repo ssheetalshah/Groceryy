@@ -9,14 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.aryanonline.R;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.Model.DealsModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.DealsModel;
 
 public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder>  {
     private static final String TAG = "DealsAdapter";
@@ -36,8 +34,8 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
         public ViewHolder(View view) {
             super(view);
 
-            idProductName1 = (TextView) view.findViewById(R.id.idProductName1);
-            Image1 = (ImageView) view.findViewById(R.id.Image1);
+            idProductName1 = (TextView) view.findViewById(com.aryanonline.R.id.idProductName1);
+            Image1 = (ImageView) view.findViewById(com.aryanonline.R.id.Image1);
          //   card = (LinearLayout) view.findViewById(R.id.card_view);
         }
     }
@@ -53,7 +51,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     @Override
     public DealsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.demoview, parent, false);
+                .inflate(com.aryanonline.R.layout.demoview, parent, false);
 
         return new DealsAdapter.ViewHolder(itemView);
     }
@@ -65,7 +63,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
         Image = dealsModel.getProductImage();
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL+Image)
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

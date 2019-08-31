@@ -21,21 +21,18 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.Session_management;
-
 
 
 public class Change_password_fragment extends Fragment {
@@ -61,20 +58,20 @@ public class Change_password_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_change_password, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_change_password, container, false);
         setHasOptionsMenu(true);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.change_password));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.change_password));
 
         sessionManagement = new Session_management(getActivity());
 
-        tv_new_pass = (TextView) view.findViewById(R.id.tv_change_new_password);
-        tv_old_pass = (TextView) view.findViewById(R.id.tv_change_old_password);
-        tv_con_pass = (TextView) view.findViewById(R.id.tv_change_con_password);
-        et_new_pass = (EditText) view.findViewById(R.id.et_change_new_password);
-        et_old_pass = (EditText) view.findViewById(R.id.et_change_old_password);
-        et_con_pass = (EditText) view.findViewById(R.id.et_change_con_password);
-        btn_change_pass = (Button) view.findViewById(R.id.btn_change_password);
+        tv_new_pass = (TextView) view.findViewById(com.aryanonline.R.id.tv_change_new_password);
+        tv_old_pass = (TextView) view.findViewById(com.aryanonline.R.id.tv_change_old_password);
+        tv_con_pass = (TextView) view.findViewById(com.aryanonline.R.id.tv_change_con_password);
+        et_new_pass = (EditText) view.findViewById(com.aryanonline.R.id.et_change_new_password);
+        et_old_pass = (EditText) view.findViewById(com.aryanonline.R.id.et_change_old_password);
+        et_con_pass = (EditText) view.findViewById(com.aryanonline.R.id.et_change_con_password);
+        btn_change_pass = (Button) view.findViewById(com.aryanonline.R.id.btn_change_password);
 
         btn_change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +85,13 @@ public class Change_password_fragment extends Fragment {
 
     private void attemptChangePassword() {
 
-        tv_new_pass.setText(getResources().getString(R.string.new_password));
-        tv_old_pass.setText(getResources().getString(R.string.old_password));
-        tv_con_pass.setText(getResources().getString(R.string.confirm_password));
+        tv_new_pass.setText(getResources().getString(com.aryanonline.R.string.new_password));
+        tv_old_pass.setText(getResources().getString(com.aryanonline.R.string.old_password));
+        tv_con_pass.setText(getResources().getString(com.aryanonline.R.string.confirm_password));
 
-        tv_new_pass.setTextColor(getResources().getColor(R.color.color_3));
-        tv_old_pass.setTextColor(getResources().getColor(R.color.color_3));
-        tv_con_pass.setTextColor(getResources().getColor(R.color.color_3));
+        tv_new_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_old_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
+        tv_con_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.color_3));
 
         String get_new_pass = et_new_pass.getText().toString();
         String get_old_pass = et_old_pass.getText().toString();
@@ -104,34 +101,34 @@ public class Change_password_fragment extends Fragment {
         View focusView = null;
 
         if (TextUtils.isEmpty(get_new_pass)) {
-            tv_new_pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_new_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = tv_new_pass;
             cancel = true;
         } else if (!isPasswordValid(get_new_pass)) {
-            tv_new_pass.setText(getString(R.string.password_too_short));
-            tv_new_pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_new_pass.setText(getString(com.aryanonline.R.string.password_too_short));
+            tv_new_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = tv_new_pass;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(get_old_pass)) {
-            tv_old_pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_old_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = tv_old_pass;
             cancel = true;
         } else if (!isPasswordValid(get_old_pass)) {
-            tv_old_pass.setText(getString(R.string.password_too_short));
-            tv_old_pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_old_pass.setText(getString(com.aryanonline.R.string.password_too_short));
+            tv_old_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = tv_old_pass;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(get_con_pass)) {
-            tv_con_pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tv_con_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
             focusView = tv_con_pass;
             cancel = true;
         } else if (!get_con_pass.equals(get_new_pass)) {
-            tv_con_pass.setTextColor(getResources().getColor(R.color.colorPrimary));
-            tv_con_pass.setText(getResources().getString(R.string.password_not_same));
+            tv_con_pass.setTextColor(getResources().getColor(com.aryanonline.R.color.colorPrimary));
+            tv_con_pass.setText(getResources().getString(com.aryanonline.R.string.password_not_same));
             focusView = tv_con_pass;
             cancel = true;
         }
@@ -205,7 +202,7 @@ public class Change_password_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -219,11 +216,11 @@ public class Change_password_fragment extends Fragment {
         // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
 
-        MenuItem cart = menu.findItem(R.id.action_cart);
+        MenuItem cart = menu.findItem(com.aryanonline.R.id.action_cart);
         cart.setVisible(false);
-        MenuItem change_pass = menu.findItem(R.id.action_change_password);
+        MenuItem change_pass = menu.findItem(com.aryanonline.R.id.action_change_password);
         change_pass.setVisible(false);
-        MenuItem search = menu.findItem(R.id.action_search);
+        MenuItem search = menu.findItem(com.aryanonline.R.id.action_search);
         search.setVisible(false);
 
     }

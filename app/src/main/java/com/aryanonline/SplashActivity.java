@@ -4,12 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -35,10 +35,10 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_splash);
+        setContentView(com.aryanonline.R.layout.activity_splash);
 
        // app_name = (TextView)findViewById(R.id.app_name);
-        imageView2 = (ImageView) findViewById(R.id.imageView2);
+        imageView2 = (ImageView) findViewById(com.aryanonline.R.id.imageView2);
 
 
 

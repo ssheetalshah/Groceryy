@@ -1,11 +1,10 @@
 package com.aryanonline.Fragment;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,17 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.aryanonline.Adapter.LocationAdapter;
+import com.aryanonline.Model.My_Locatio_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.HttpHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import com.aryanonline.Adapter.LocationAdapter;
-import com.aryanonline.Model.My_Locatio_model;
-
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.HttpHandler;
 
 
 public class LocationFragment extends Fragment {
@@ -71,8 +68,8 @@ public class LocationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_location, container, false);
-        rv_myorder = (RecyclerView) view.findViewById(R.id.rv_myorder);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_location, container, false);
+        rv_myorder = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_myorder);
 
         my_order_modelList = new ArrayList<>();
 

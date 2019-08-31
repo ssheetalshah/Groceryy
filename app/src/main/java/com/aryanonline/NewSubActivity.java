@@ -1,29 +1,29 @@
 package com.aryanonline;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.aryanonline.Adapter.NewSubAdapter;
-import com.aryanonline.Adapter.TopViewAdapter;
 import com.aryanonline.Model.NewCategory;
 import com.aryanonline.Model.SubCatModel;
-import com.aryanonline.Model.TopModel;
 import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.HttpHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class NewSubActivity extends AppCompatActivity {
     RecyclerView subCateList;
@@ -35,24 +35,41 @@ public class NewSubActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_sub);
+        setContentView(com.aryanonline.R.layout.activity_new_sub);
 
         if (getIntent() != null) {
-            NewCategory newCategory = (NewCategory) getIntent().getSerializableExtra("NewCategory");
-            prId = newCategory.getCategoryId();
+
+            prId = getIntent().getStringExtra("NewCategory");
+
+//            NewCategory newCategory = (NewCategory) getIntent().getSerializableExtra("NewCategory");
+//            prId = newCategory.getCategoryId();
 //            provId = reviewsModel1.getProviderId();
 //            prId = reviewsModel1.getId();
 
         }
 
-        subCateList = (RecyclerView)findViewById(R.id.subCateList);
+        subCateList = (RecyclerView)findViewById(com.aryanonline.R.id.subCateList);
 
         subC_list = new ArrayList<>();
 
         if (ConnectivityReceiver.isConnected()) {
             new GetSublist().execute();
         }
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("font/Roboto-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
     }
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        Log.e("Attach Base Context","----------");
+    }
+
 
     class GetSublist extends AsyncTask<String, String, String> {
         String output = "";
@@ -119,6 +136,12 @@ public class NewSubActivity extends AppCompatActivity {
 
 
                 } catch (JSONException e) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(output);
+                        Toast.makeText(NewSubActivity.this, ""+jsonObject.getString("data"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException ex) {
+                        ex.printStackTrace();
+                    }
                     e.printStackTrace();
                     //  dialog.dismiss();
                 }

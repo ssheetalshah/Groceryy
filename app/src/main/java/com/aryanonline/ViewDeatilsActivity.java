@@ -2,20 +2,17 @@ package com.aryanonline;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.aryanonline.Adapter.TopAdapter;
 import com.aryanonline.Adapter.TopViewAdapter;
 import com.aryanonline.Model.TopModel;
 import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.HttpHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,9 +29,9 @@ public class ViewDeatilsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_deatils);
+        setContentView(com.aryanonline.R.layout.activity_view_deatils);
 
-        rv_top = (RecyclerView)findViewById(R.id.rv_top);
+        rv_top = (RecyclerView)findViewById(com.aryanonline.R.id.rv_top);
 
         top_list = new ArrayList<>();
 

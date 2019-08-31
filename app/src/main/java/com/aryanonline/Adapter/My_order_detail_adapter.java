@@ -8,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.Model.My_order_detail_model;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.My_order_detail_model;
-import com.aryanonline.R;
 
 
 public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detail_adapter.MyViewHolder> {
@@ -29,10 +27,10 @@ public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detai
 
         public MyViewHolder(View view) {
             super(view);
-            tv_title = (TextView) view.findViewById(R.id.tv_order_Detail_title);
-            tv_price = (TextView) view.findViewById(R.id.tv_order_Detail_price);
-            tv_qty = (TextView) view.findViewById(R.id.tv_order_Detail_qty);
-            iv_img = (ImageView) view.findViewById(R.id.iv_order_detail_img);
+            tv_title = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_title);
+            tv_price = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_price);
+            tv_qty = (TextView) view.findViewById(com.aryanonline.R.id.tv_order_Detail_qty);
+            iv_img = (ImageView) view.findViewById(com.aryanonline.R.id.iv_order_detail_img);
 
         }
     }
@@ -44,7 +42,7 @@ public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detai
     @Override
     public My_order_detail_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_my_order_detail_rv, parent, false);
+                .inflate(com.aryanonline.R.layout.row_my_order_detail_rv, parent, false);
 
         context = parent.getContext();
 
@@ -58,7 +56,7 @@ public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detai
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
                 .centerCrop()
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

@@ -17,6 +17,13 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
+import com.aryanonline.util.DatabaseHandler;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,15 +32,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
-import com.aryanonline.util.DatabaseHandler;
-import com.aryanonline.util.Session_management;
 
 
 public class Delivery_payment_detail_fragment extends Fragment {
@@ -65,20 +63,20 @@ public class Delivery_payment_detail_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_confirm_order, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_confirm_order, container, false);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.payment_detail));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.payment_detail));
 
         db_cart = new DatabaseHandler(getActivity());
         sessionManagement = new Session_management(getActivity());
 
-        tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
-        tv_address = (TextView) view.findViewById(R.id.txtAddress);
+        tv_timeslot = (TextView) view.findViewById(com.aryanonline.R.id.textTimeSlot);
+        tv_address = (TextView) view.findViewById(com.aryanonline.R.id.txtAddress);
         //tv_item = (TextView) view.findViewById(R.id.textItems);
         //tv_total = (TextView) view.findViewById(R.id.textPrice);
-        tv_total = (TextView) view.findViewById(R.id.txtTotal);
+        tv_total = (TextView) view.findViewById(com.aryanonline.R.id.txtTotal);
 
-        btn_order = (Button) view.findViewById(R.id.buttonContinue);
+        btn_order = (Button) view.findViewById(com.aryanonline.R.id.buttonContinue);
 
      /*   getdate = getArguments().getString("getdate");
         gettime = getArguments().getString("time");
@@ -93,11 +91,11 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
         //tv_total.setText("" + db_cart.getTotalAmount());
         //tv_item.setText("" + db_cart.getCartCount());
-        tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
-                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
-                getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
-                getResources().getString(R.string.total_amount) +
-                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + " " + getResources().getString(R.string.currency));
+        tv_total.setText(getResources().getString(com.aryanonline.R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
+                getResources().getString(com.aryanonline.R.string.amount) + db_cart.getTotalAmount() + "\n" +
+                getResources().getString(com.aryanonline.R.string.delivery_charge) + deli_charges + "\n" +
+                getResources().getString(com.aryanonline.R.string.total_amount) +
+                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + " " + getResources().getString(com.aryanonline.R.string.currency));
 
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +185,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
                         args.putString("msg", msg);
                         fm.setArguments(args);
                         FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                                 .addToBackStack(null).commit();
 
                     }
@@ -201,7 +199,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

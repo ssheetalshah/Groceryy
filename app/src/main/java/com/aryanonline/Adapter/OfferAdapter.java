@@ -9,14 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.Model.OfferModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
-
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.OfferModel;
-import com.aryanonline.R;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder>  {
     private static final String TAG = "OfferAdapter";
@@ -37,8 +35,8 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
             super(view);
 
            // idProductName = (TextView) view.findViewById(R.id.idProductName);
-            idProductImage = (ImageView) view.findViewById(R.id.idProductImage);
-            card = (LinearLayout) view.findViewById(R.id.card_view);
+            idProductImage = (ImageView) view.findViewById(com.aryanonline.R.id.idProductImage);
+            card = (LinearLayout) view.findViewById(com.aryanonline.R.id.card_view);
         }
     }
 
@@ -53,7 +51,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
     @Override
     public OfferAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.vertical_menu, parent, false);
+                .inflate(com.aryanonline.R.layout.vertical_menu, parent, false);
 
         return new OfferAdapter.ViewHolder(itemView);
     }
@@ -65,7 +63,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         Image = offerModel.getImage();
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL+Image)
-                .placeholder(R.drawable.aplogo)
+                .placeholder(com.aryanonline.R.drawable.aplogo)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()

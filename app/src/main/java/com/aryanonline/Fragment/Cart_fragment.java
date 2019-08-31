@@ -25,6 +25,13 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.aryanonline.Adapter.Cart_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.ContinueActivity;
+import com.aryanonline.MainActivity;
+import com.aryanonline.util.DatabaseHandler;
+import com.aryanonline.util.Session_management;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,16 +39,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.aryanonline.Adapter.Cart_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.AppController;
-import com.aryanonline.ContinueActivity;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.DatabaseHandler;
-import com.aryanonline.util.Session_management;
 
 
 public class Cart_fragment extends Fragment implements View.OnClickListener {
@@ -69,18 +66,18 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_cart, container, false);
 
-        ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_cart_title));
+        ((MainActivity) getActivity()).setTitle(getResources().getString(com.aryanonline.R.string.tv_cart_title));
 
         sessionManagement = new Session_management(getActivity());
         sessionManagement.cleardatetime();
 
-        tv_clear = (TextView) view.findViewById(R.id.tv_cart_clear);
-        tv_total = (TextView) view.findViewById(R.id.tv_cart_total);
-        tv_item = (TextView) view.findViewById(R.id.tv_cart_item);
-        btn_checkout = (Button) view.findViewById(R.id.btn_cart_checkout);
-        rv_cart = (RecyclerView) view.findViewById(R.id.rv_cart);
+        tv_clear = (TextView) view.findViewById(com.aryanonline.R.id.tv_cart_clear);
+        tv_total = (TextView) view.findViewById(com.aryanonline.R.id.tv_cart_total);
+        tv_item = (TextView) view.findViewById(com.aryanonline.R.id.tv_cart_item);
+        btn_checkout = (Button) view.findViewById(com.aryanonline.R.id.btn_cart_checkout);
+        rv_cart = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_cart);
         rv_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         db = new DatabaseHandler(getActivity());
@@ -103,10 +100,10 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.tv_cart_clear) {
+        if (id == com.aryanonline.R.id.tv_cart_clear) {
             // showdialog
             showClearDialog();
-        } else if (id == R.id.btn_cart_checkout) {
+        } else if (id == com.aryanonline.R.id.btn_cart_checkout) {
             if(!sessionManagement.isLoggedIn()) {
                 Intent i = new Intent(getActivity(), ContinueActivity.class);
                 startActivity(i);
@@ -115,7 +112,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                 Fragment fm = new Delivery_fragment();
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
 //                Intent i = new Intent(getActivity(), Deli.class);
 //                startActivity(i);
@@ -219,7 +216,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                                     Fragment fm = new Delivery_fragment();
                                     fm.setArguments(args);
                                     FragmentManager fragmentManager = getFragmentManager();
-                                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                    fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                                             .addToBackStack(null).commit();
                                 }else {
                                     //Toast.makeText(getActivity(), "Please login or regiter.\n continue", Toast.LENGTH_SHORT).show();

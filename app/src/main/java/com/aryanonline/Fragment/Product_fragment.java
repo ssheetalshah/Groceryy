@@ -21,6 +21,14 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.aryanonline.Adapter.Product_adapter;
+import com.aryanonline.AppController;
+import com.aryanonline.Config.BaseURL;
+import com.aryanonline.MainActivity;
+import com.aryanonline.Model.Category_model;
+import com.aryanonline.Model.Product_model;
+import com.aryanonline.util.ConnectivityReceiver;
+import com.aryanonline.util.CustomVolleyJsonRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,16 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.aryanonline.Adapter.Product_adapter;
-import com.aryanonline.Config.BaseURL;
-import com.aryanonline.Model.Category_model;
-import com.aryanonline.Model.Product_model;
-import com.aryanonline.AppController;
-import com.aryanonline.MainActivity;
-import com.aryanonline.R;
-import com.aryanonline.util.ConnectivityReceiver;
-import com.aryanonline.util.CustomVolleyJsonRequest;
 
 
 public class Product_fragment extends Fragment {
@@ -70,12 +68,12 @@ public class Product_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        View view = inflater.inflate(com.aryanonline.R.layout.fragment_product, container, false);
 
         setHasOptionsMenu(true);
 
-        tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
-        rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
+        tab_cat = (TabLayout) view.findViewById(com.aryanonline.R.id.tab_cat);
+        rv_cat = (RecyclerView) view.findViewById(com.aryanonline.R.id.rv_subcategory);
         rv_cat.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         String getcat_id = getArguments().getString("cat_id");
@@ -89,7 +87,7 @@ public class Product_fragment extends Fragment {
         }
 
         tab_cat.setVisibility(View.GONE);
-        tab_cat.setSelectedTabIndicatorColor(getActivity().getResources().getColor(R.color.white));
+        tab_cat.setSelectedTabIndicatorColor(getActivity().getResources().getColor(com.aryanonline.R.color.white));
 
         tab_cat.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -155,7 +153,7 @@ public class Product_fragment extends Fragment {
 
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
-                                Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -170,7 +168,7 @@ public class Product_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -230,7 +228,7 @@ public class Product_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(com.aryanonline.R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -246,9 +244,9 @@ public class Product_fragment extends Fragment {
         // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
 
-        MenuItem search = menu.findItem(R.id.action_search);
+        MenuItem search = menu.findItem(com.aryanonline.R.id.action_search);
         search.setVisible(true);
-        MenuItem check = menu.findItem(R.id.action_change_password);
+        MenuItem check = menu.findItem(com.aryanonline.R.id.action_change_password);
         check.setVisible(false);
     }
 
@@ -256,10 +254,10 @@ public class Product_fragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.action_search:
+            case com.aryanonline.R.id.action_search:
                 Fragment fm = new Search_fragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                fragmentManager.beginTransaction().replace(com.aryanonline.R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
                 return false;
         }
